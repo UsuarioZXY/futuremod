@@ -16,7 +16,9 @@
   "item.futuremod.alien_bone": "Alien Bone",
   "item.futuremod.primitive_cloth_fragment": "Primitive Cloth Fragment",
   "item.futuremod.primitive_cloth": "Primitive Cloth Piece",
-  "block.futuremod.steel_bars": "Steel Bars",
+  "item.futuremod.steel_rod": "Steel Rod",
+  "item.futuremod.primitive_thread": "Primitive Thread",
+  "item.futuremod.broken_bone": "Broken Bone",
   "item.futuremod.steel_ingot": "Steel Ingot",
   "creativetab.futuremod.future_tab": "Future Mod"
 }
