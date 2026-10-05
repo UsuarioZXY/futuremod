@@ -11,9 +11,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 
-/** Pieza de armadura de acero: ademas de la defensa, da vida maxima extra. */
+/** Pieza de armadura de acero: ademas de la defensa, da vida maxima extra (y velocidad en las botas). */
 public class SteelArmorItem extends ArmorItem {
     private static final EnumMap<ArmorItem.Type, UUID> HEALTH_UUIDS = new EnumMap<>(ArmorItem.Type.class);
+    private static final UUID SPEED_UUID = UUID.fromString("7c1d9a52-3b0e-4f6a-9d11-5a2e8c4f0b05");
 
     static {
         HEALTH_UUIDS.put(ArmorItem.Type.BOOTS, UUID.fromString("7c1d9a52-3b0e-4f6a-9d11-5a2e8c4f0b01"));
@@ -23,11 +24,19 @@ public class SteelArmorItem extends ArmorItem {
     }
 
     private final double bonusHealth;
+    private final double speedBonus;
 
     /** bonusHealth en puntos de vida (2.0 = 1 corazon). */
     public SteelArmorItem(ArmorMaterial material, ArmorItem.Type type, Properties properties, double bonusHealth) {
+        this(material, type, properties, bonusHealth, 0.0D);
+    }
+
+    /** speedBonus como fraccion de la velocidad base (0.10 = +10%). */
+    public SteelArmorItem(ArmorMaterial material, ArmorItem.Type type, Properties properties,
+                          double bonusHealth, double speedBonus) {
         super(material, type, properties);
         this.bonusHealth = bonusHealth;
+        this.speedBonus = speedBonus;
     }
 
     @Override
@@ -41,6 +50,11 @@ public class SteelArmorItem extends ArmorItem {
         builder.put(Attributes.MAX_HEALTH, new AttributeModifier(
                 HEALTH_UUIDS.get(this.getType()), "Steel armor health", this.bonusHealth,
                 AttributeModifier.Operation.ADDITION));
+        if (this.speedBonus != 0.0D) {
+            builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(
+                    SPEED_UUID, "Steel boots speed", this.speedBonus,
+                    AttributeModifier.Operation.MULTIPLY_BASE));
+        }
         return builder.build();
     }
 }

@@ -36,7 +36,7 @@ public class AlienEntity extends Monster {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 34.0D)
+                .add(Attributes.MAX_HEALTH, 16.0D)
                 .add(Attributes.ATTACK_DAMAGE, 6.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.29D)
                 .add(Attributes.FOLLOW_RANGE, 32.0D)

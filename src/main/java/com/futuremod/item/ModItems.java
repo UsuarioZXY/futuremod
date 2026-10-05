@@ -46,7 +46,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> STEEL_BOOTS =
             ITEMS.register("steel_boots",
-                    () -> new SteelArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.BOOTS, new Item.Properties(), 2.0D));
+                    () -> new SteelArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.BOOTS, new Item.Properties(), 2.0D, 0.10D));
 
     // Botin del alienigena
     public static final RegistryObject<Item> ALIEN_BONE =

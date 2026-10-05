@@ -12,6 +12,7 @@ public class AlienRenderer extends MobRenderer<AlienEntity, AlienModel<AlienEnti
 
     public AlienRenderer(EntityRendererProvider.Context context) {
         super(context, new AlienModel<>(context.bakeLayer(AlienModel.LAYER_LOCATION)), 0.5F);
+        this.addLayer(new AlienEyesLayer(this));
     }
 
     @Override

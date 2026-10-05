@@ -3,7 +3,7 @@
   "biomes": "#minecraft:is_overworld",
   "spawners": {
     "type": "futuremod:alien",
-    "weight": 12,
+    "weight": 40,
     "minCount": 3,
     "maxCount": 7
   }
