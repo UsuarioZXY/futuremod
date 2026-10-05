@@ -37,6 +37,7 @@ public class ModCreativeTabs {
                         output.accept(ModItems.PRIMITIVE_CLOTH_FRAGMENT.get());
                         output.accept(ModItems.PRIMITIVE_CLOTH.get());
                         output.accept(ModItems.PRIMITIVE_THREAD.get());
+                        output.accept(ModItems.PRIMITIVE_BOW.get());
                         output.accept(ModItems.ALIEN_SPAWN_EGG.get());
                     })
                     .build());

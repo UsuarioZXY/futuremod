@@ -2,13 +2,35 @@ package com.futuremod.client;
 
 import com.futuremod.FutureMod;
 import com.futuremod.entity.ModEntities;
+import com.futuremod.item.ModItems;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = FutureMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientModEvents {
+
+    /** Animacion del arco al tensarlo (igual que el arco normal). */
+    @SubscribeEvent
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            ItemProperties.register(ModItems.PRIMITIVE_BOW.get(), new ResourceLocation("pull"),
+                    (stack, level, entity, seed) -> {
+                        if (entity == null) {
+                            return 0.0F;
+                        }
+                        return entity.getUseItem() != stack ? 0.0F
+                                : (float) (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0F;
+                    });
+            ItemProperties.register(ModItems.PRIMITIVE_BOW.get(), new ResourceLocation("pulling"),
+                    (stack, level, entity, seed) ->
+                            entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
+        });
+    }
 
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {

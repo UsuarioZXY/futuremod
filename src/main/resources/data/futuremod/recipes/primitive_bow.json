@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [ "BAT", "A T", "BAT" ],
+  "key": {
+    "B": { "item": "futuremod:broken_bone" },
+    "A": { "item": "futuremod:alien_bone" },
+    "T": { "item": "futuremod:primitive_thread" }
+  },
+  "result": { "item": "futuremod:primitive_bow" }
+}
