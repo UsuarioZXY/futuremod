@@ -1,0 +1,21 @@
+{
+  "block.futuremod.steel_ore": "Mena de acero",
+  "block.futuremod.deepslate_steel_ore": "Mena de acero de pizarra abismal",
+  "item.futuremod.raw_steel": "Acero sin cocer",
+  "item.futuremod.steel_chip": "Chip de acero",
+  "item.futuremod.steel_motor": "Motor de acero",
+  "item.futuremod.steel_nugget": "Pepita de acero",
+  "block.futuremod.reinforced_glass": "Cristal reforzado",
+  "item.futuremod.steel_helmet": "Casco de acero",
+  "item.futuremod.steel_boots": "Botas de acero",
+  "item.futuremod.steel_leggings": "Pantalones de acero",
+  "item.futuremod.steel_core": "Núcleo de acero",
+  "item.futuremod.steel_chestplate": "Peto de acero",
+  "item.futuremod.alien_spawn_egg": "Generar alienígena",
+  "entity.futuremod.alien": "Alienígena",
+  "item.futuremod.alien_bone": "Hueso de alienígena",
+  "item.futuremod.primitive_cloth_fragment": "Fragmento de tela primitiva",
+  "item.futuremod.primitive_cloth": "Trozo de tela primitiva",
+  "item.futuremod.steel_ingot": "Lingote de acero",
+  "creativetab.futuremod.future_tab": "Future Mod"
+}

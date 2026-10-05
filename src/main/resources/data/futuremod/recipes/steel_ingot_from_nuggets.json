@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [ "NNN", "NNN", "NNN" ],
+  "key": { "N": { "item": "futuremod:steel_nugget" } },
+  "result": { "item": "futuremod:steel_ingot" }
+}

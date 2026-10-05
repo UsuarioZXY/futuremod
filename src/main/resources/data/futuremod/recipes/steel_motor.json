@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [ "SRS", "SCS", "SRS" ],
+  "key": {
+    "S": { "item": "futuremod:steel_ingot" },
+    "R": { "item": "minecraft:redstone" },
+    "C": { "item": "futuremod:steel_chip" }
+  },
+  "result": { "item": "futuremod:steel_motor" }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [ "M M", "S S" ],
+  "key": {
+    "M": { "item": "futuremod:steel_motor" },
+    "S": { "item": "futuremod:steel_ingot" }
+  },
+  "result": { "item": "futuremod:steel_boots" }
+}

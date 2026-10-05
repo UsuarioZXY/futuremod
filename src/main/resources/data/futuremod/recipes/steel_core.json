@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [ "MSM", "SCS", "MSM" ],
+  "key": {
+    "M": { "item": "futuremod:steel_motor" },
+    "S": { "item": "futuremod:steel_ingot" },
+    "C": { "item": "futuremod:steel_chip" }
+  },
+  "result": { "item": "futuremod:steel_core" }
+}

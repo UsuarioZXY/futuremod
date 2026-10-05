@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [ { "item": "futuremod:steel_ingot" } ],
+  "result": { "item": "futuremod:steel_nugget", "count": 9 }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "L L",
+    "STS",
+    "RSR"
+  ],
+  "key": {
+    "L": { "item": "minecraft:lightning_rod" },
+    "S": { "item": "futuremod:steel_ingot" },
+    "T": { "item": "minecraft:redstone_torch" },
+    "R": { "item": "minecraft:redstone" }
+  },
+  "result": { "item": "futuremod:steel_chip" }
+}

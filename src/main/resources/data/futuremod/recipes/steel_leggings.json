@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [ "MCM", "S S", "S S" ],
+  "key": {
+    "M": { "item": "futuremod:steel_motor" },
+    "C": { "item": "futuremod:steel_chip" },
+    "S": { "item": "futuremod:steel_ingot" }
+  },
+  "result": { "item": "futuremod:steel_leggings" }
+}

@@ -1,0 +1,21 @@
+{
+  "block.futuremod.steel_ore": "Steel Ore",
+  "block.futuremod.deepslate_steel_ore": "Deepslate Steel Ore",
+  "item.futuremod.raw_steel": "Raw Steel",
+  "item.futuremod.steel_chip": "Steel Chip",
+  "item.futuremod.steel_motor": "Steel Motor",
+  "item.futuremod.steel_nugget": "Steel Nugget",
+  "block.futuremod.reinforced_glass": "Reinforced Glass",
+  "item.futuremod.steel_helmet": "Steel Helmet",
+  "item.futuremod.steel_boots": "Steel Boots",
+  "item.futuremod.steel_leggings": "Steel Leggings",
+  "item.futuremod.steel_core": "Steel Core",
+  "item.futuremod.steel_chestplate": "Steel Chestplate",
+  "item.futuremod.alien_spawn_egg": "Alien Spawn Egg",
+  "entity.futuremod.alien": "Alien",
+  "item.futuremod.alien_bone": "Alien Bone",
+  "item.futuremod.primitive_cloth_fragment": "Primitive Cloth Fragment",
+  "item.futuremod.primitive_cloth": "Primitive Cloth Piece",
+  "item.futuremod.steel_ingot": "Steel Ingot",
+  "creativetab.futuremod.future_tab": "Future Mod"
+}

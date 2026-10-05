@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": [
+    { "item": "futuremod:steel_ore" },
+    { "item": "futuremod:deepslate_steel_ore" }
+  ],
+  "result": "futuremod:steel_ingot",
+  "experience": 1.0,
+  "cookingtime": 100
+}
