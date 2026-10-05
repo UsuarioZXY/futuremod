@@ -11,7 +11,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 public enum ModArmorMaterials implements ArmorMaterial {
     // nombre, multiplicador de durabilidad (hierro 15, diamante 33), defensa casco/peto/pantalon/botas,
     // encantabilidad, sonido, dureza, resistencia al empuje, material de reparacion
-    STEEL("steel", 25, 3, 7, 5, 3, 12, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F,
+    STEEL("steel", 140, 3, 7, 5, 3, 12, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F,
             () -> Ingredient.of(ModItems.STEEL_INGOT.get()));
 
     private final String name;

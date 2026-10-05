@@ -58,6 +58,15 @@ public class ModItems {
     public static final RegistryObject<Item> PRIMITIVE_CLOTH =
             ITEMS.register("primitive_cloth", () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> STEEL_ROD =
+            ITEMS.register("steel_rod", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> PRIMITIVE_THREAD =
+            ITEMS.register("primitive_thread", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> BROKEN_BONE =
+            ITEMS.register("broken_bone", () -> new Item(new Item.Properties()));
+
     public static final RegistryObject<Item> ALIEN_SPAWN_EGG =
             ITEMS.register("alien_spawn_egg",
                     () -> new ForgeSpawnEggItem(ModEntities.ALIEN, 0x6A8A6E, 0xE6E2C8, new Item.Properties()));

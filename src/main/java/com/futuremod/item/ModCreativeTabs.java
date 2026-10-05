@@ -23,18 +23,20 @@ public class ModCreativeTabs {
                         output.accept(ModItems.RAW_STEEL.get());
                         output.accept(ModItems.STEEL_INGOT.get());
                         output.accept(ModItems.STEEL_NUGGET.get());
+                        output.accept(ModItems.STEEL_ROD.get());
                         output.accept(ModItems.STEEL_CHIP.get());
                         output.accept(ModItems.STEEL_MOTOR.get());
                         output.accept(ModItems.STEEL_CORE.get());
                         output.accept(ModBlocks.REINFORCED_GLASS.get());
-                        output.accept(ModBlocks.STEEL_BARS.get());
                         output.accept(ModItems.STEEL_HELMET.get());
                         output.accept(ModItems.STEEL_CHESTPLATE.get());
                         output.accept(ModItems.STEEL_LEGGINGS.get());
                         output.accept(ModItems.STEEL_BOOTS.get());
                         output.accept(ModItems.ALIEN_BONE.get());
+                        output.accept(ModItems.BROKEN_BONE.get());
                         output.accept(ModItems.PRIMITIVE_CLOTH_FRAGMENT.get());
                         output.accept(ModItems.PRIMITIVE_CLOTH.get());
+                        output.accept(ModItems.PRIMITIVE_THREAD.get());
                         output.accept(ModItems.ALIEN_SPAWN_EGG.get());
                     })
                     .build());

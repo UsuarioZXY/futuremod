@@ -10,7 +10,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.GlassBlock;
-import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -32,9 +31,6 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> REINFORCED_GLASS = registerBlock("reinforced_glass",
             () -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(3.5F, 30.0F)));
-
-    public static final RegistryObject<Block> STEEL_BARS = registerBlock("steel_bars",
-            () -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BARS).strength(5.0F, 10.0F)));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> reg = BLOCKS.register(name, block);
