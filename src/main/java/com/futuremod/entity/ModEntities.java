@@ -17,4 +17,17 @@ public class ModEntities {
                     .sized(0.7F, 1.95F)
                     .clientTrackingRange(8)
                     .build(new ResourceLocation(FutureMod.MODID, "alien").toString()));
+
+    public static final RegistryObject<EntityType<AlienArcherEntity>> ALIEN_ARCHER = ENTITIES.register("alien_archer",
+            () -> EntityType.Builder.of(AlienArcherEntity::new, MobCategory.MONSTER)
+                    .sized(0.7F, 1.95F)
+                    .clientTrackingRange(8)
+                    .build(new ResourceLocation(FutureMod.MODID, "alien_archer").toString()));
+
+    public static final RegistryObject<EntityType<PrimitiveArrow>> PRIMITIVE_ARROW = ENTITIES.register("primitive_arrow",
+            () -> EntityType.Builder.<PrimitiveArrow>of(PrimitiveArrow::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(4)
+                    .updateInterval(20)
+                    .build(new ResourceLocation(FutureMod.MODID, "primitive_arrow").toString()));
 }

@@ -1,7 +1,10 @@
 package com.futuremod.client;
 
 import com.futuremod.FutureMod;
+import com.futuremod.entity.AlienArcherEntity;
 import com.futuremod.entity.AlienEntity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -12,9 +15,10 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
 
 /** Alienigena primitivo: craneo en cupula con antenas, colmillos, espinas de hueso, taparrabos y garrote. */
-public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> {
+public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> implements ArmedModel {
     public static final ModelLayerLocation LAYER_LOCATION =
             new ModelLayerLocation(new ResourceLocation(FutureMod.MODID, "alien"), "main");
 
@@ -23,6 +27,7 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> {
     private final ModelPart antennaR;
     private final ModelPart antennaL;
     private final ModelPart rightArm;
+    private final ModelPart club;
     private final ModelPart leftArm;
     private final ModelPart rightLeg;
     private final ModelPart leftLeg;
@@ -34,6 +39,7 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> {
         this.antennaL = this.head.getChild("antenna_l");
         this.rightArm = root.getChild("right_arm");
         this.leftArm = root.getChild("left_arm");
+        this.club = this.rightArm.getChild("club");
         this.rightLeg = root.getChild("right_leg");
         this.leftLeg = root.getChild("left_leg");
     }
@@ -146,5 +152,23 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> {
             this.rightArm.zRot = 0.1F + Mth.cos(ageInTicks * 0.09F) * 0.04F;
             this.leftArm.zRot = -0.1F - Mth.cos(ageInTicks * 0.09F) * 0.04F;
         }
+
+        // El arquero no lleva garrote: sostiene un arco y apunta con ambos brazos
+        boolean archer = entity instanceof AlienArcherEntity;
+        this.club.visible = !archer;
+        if (archer && entity.isAggressive()) {
+            this.rightArm.yRot = -0.1F + this.head.yRot;
+            this.leftArm.yRot = 0.1F + this.head.yRot + 0.4F;
+            this.rightArm.xRot = (-(float) Math.PI / 2F) + this.head.xRot;
+            this.leftArm.xRot = (-(float) Math.PI / 2F) + this.head.xRot;
+            this.rightArm.zRot = 0.0F;
+            this.leftArm.zRot = 0.0F;
+        }
+    }
+
+    @Override
+    public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
+        ModelPart part = arm == HumanoidArm.RIGHT ? this.rightArm : this.leftArm;
+        part.translateAndRotate(poseStack);
     }
 }

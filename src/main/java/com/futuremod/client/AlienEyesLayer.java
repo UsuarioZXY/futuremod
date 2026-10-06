@@ -1,6 +1,5 @@
 package com.futuremod.client;
 
-import com.futuremod.FutureMod;
 import com.futuremod.entity.AlienEntity;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -8,16 +7,16 @@ import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.resources.ResourceLocation;
 
 /** Ojos y antenas que brillan en la oscuridad. */
-public class AlienEyesLayer extends EyesLayer<AlienEntity, AlienModel<AlienEntity>> {
-    private static final RenderType GLOW =
-            RenderType.eyes(new ResourceLocation(FutureMod.MODID, "textures/entity/alien_eyes.png"));
+public class AlienEyesLayer<T extends AlienEntity> extends EyesLayer<T, AlienModel<T>> {
+    private final RenderType glow;
 
-    public AlienEyesLayer(RenderLayerParent<AlienEntity, AlienModel<AlienEntity>> parent) {
+    public AlienEyesLayer(RenderLayerParent<T, AlienModel<T>> parent, ResourceLocation texture) {
         super(parent);
+        this.glow = RenderType.eyes(texture);
     }
 
     @Override
     public RenderType renderType() {
-        return GLOW;
+        return this.glow;
     }
 }

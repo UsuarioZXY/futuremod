@@ -9,10 +9,12 @@ import net.minecraft.resources.ResourceLocation;
 public class AlienRenderer extends MobRenderer<AlienEntity, AlienModel<AlienEntity>> {
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(FutureMod.MODID, "textures/entity/alien.png");
+    private static final ResourceLocation EYES =
+            new ResourceLocation(FutureMod.MODID, "textures/entity/alien_eyes.png");
 
     public AlienRenderer(EntityRendererProvider.Context context) {
         super(context, new AlienModel<>(context.bakeLayer(AlienModel.LAYER_LOCATION)), 0.5F);
-        this.addLayer(new AlienEyesLayer(this));
+        this.addLayer(new AlienEyesLayer<>(this, EYES));
     }
 
     @Override

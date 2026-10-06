@@ -45,7 +45,7 @@ public class AlienEntity extends Monster {
     }
 
     /** Reglas de aparicion: no piden oscuridad, asi que salen tambien de dia. */
-    public static boolean checkAlienSpawnRules(EntityType<AlienEntity> type, ServerLevelAccessor level,
+    public static <T extends AlienEntity> boolean checkAlienSpawnRules(EntityType<T> type, ServerLevelAccessor level,
                                                MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return level.getDifficulty() != Difficulty.PEACEFUL
                 && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);

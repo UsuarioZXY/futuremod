@@ -71,6 +71,13 @@ public class ModItems {
     public static final RegistryObject<Item> PRIMITIVE_BOW =
             ITEMS.register("primitive_bow", () -> new BowItem(new Item.Properties().durability(400)));
 
+    public static final RegistryObject<Item> PRIMITIVE_ARROW =
+            ITEMS.register("primitive_arrow", () -> new PrimitiveArrowItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> ALIEN_ARCHER_SPAWN_EGG =
+            ITEMS.register("alien_archer_spawn_egg",
+                    () -> new ForgeSpawnEggItem(ModEntities.ALIEN_ARCHER, 0x4E8C8A, 0xE6A050, new Item.Properties()));
+
     public static final RegistryObject<Item> ALIEN_SPAWN_EGG =
             ITEMS.register("alien_spawn_egg",
                     () -> new ForgeSpawnEggItem(ModEntities.ALIEN, 0x6A8A6E, 0xE6E2C8, new Item.Properties()));

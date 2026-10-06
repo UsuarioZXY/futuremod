@@ -1,6 +1,7 @@
 package com.futuremod;
 
 import com.futuremod.block.ModBlocks;
+import com.futuremod.effect.ModEffects;
 import com.futuremod.entity.ModEntities;
 import com.futuremod.item.ModCreativeTabs;
 import com.futuremod.item.ModItems;
@@ -17,6 +18,7 @@ public class FutureMod {
         ModItems.ITEMS.register(bus);
         ModBlocks.BLOCKS.register(bus);
         ModEntities.ENTITIES.register(bus);
+        ModEffects.EFFECTS.register(bus);
         ModCreativeTabs.TABS.register(bus);
     }
 }

@@ -40,5 +40,7 @@ public class ClientModEvents {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.ALIEN.get(), AlienRenderer::new);
+        event.registerEntityRenderer(ModEntities.ALIEN_ARCHER.get(), AlienArcherRenderer::new);
+        event.registerEntityRenderer(ModEntities.PRIMITIVE_ARROW.get(), PrimitiveArrowRenderer::new);
     }
 }
