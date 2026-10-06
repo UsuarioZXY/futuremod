@@ -95,6 +95,14 @@ public class ModItems {
             ITEMS.register("alien_shieldbearer_spawn_egg",
                     () -> new ForgeSpawnEggItem(ModEntities.ALIEN_SHIELDBEARER, 0x5C7A4A, 0x9A7048, new Item.Properties()));
 
+    public static final RegistryObject<Item> ALIEN_KNIGHT_SPAWN_EGG =
+            ITEMS.register("alien_knight_spawn_egg",
+                    () -> new ForgeSpawnEggItem(ModEntities.ALIEN_KNIGHT, 0x6B7F8F, 0xB03A3A, new Item.Properties()));
+
+    public static final RegistryObject<Item> RODIA_SPAWN_EGG =
+            ITEMS.register("rodia_spawn_egg",
+                    () -> new ForgeSpawnEggItem(ModEntities.RODIA, 0x4E6B55, 0xE0B050, new Item.Properties()));
+
     public static final RegistryObject<Item> PRIMITIVE_BOW =
             ITEMS.register("primitive_bow", () -> new BowItem(new Item.Properties().durability(400)));
 

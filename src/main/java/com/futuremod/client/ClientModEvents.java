@@ -38,6 +38,7 @@ public class ClientModEvents {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(AlienModel.LAYER_LOCATION, AlienModel::createBodyLayer);
+        event.registerLayerDefinition(RodiaModel.LAYER_LOCATION, RodiaModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -45,6 +46,8 @@ public class ClientModEvents {
         event.registerEntityRenderer(ModEntities.ALIEN.get(), AlienRenderer::new);
         event.registerEntityRenderer(ModEntities.ALIEN_ARCHER.get(), AlienArcherRenderer::new);
         event.registerEntityRenderer(ModEntities.ALIEN_SHIELDBEARER.get(), AlienShieldbearerRenderer::new);
+        event.registerEntityRenderer(ModEntities.ALIEN_KNIGHT.get(), AlienKnightRenderer::new);
+        event.registerEntityRenderer(ModEntities.RODIA.get(), RodiaRenderer::new);
         event.registerEntityRenderer(ModEntities.PRIMITIVE_ARROW.get(), PrimitiveArrowRenderer::new);
     }
 }

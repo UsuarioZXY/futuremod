@@ -3,6 +3,7 @@ package com.futuremod.client;
 import com.futuremod.FutureMod;
 import com.futuremod.entity.AlienArcherEntity;
 import com.futuremod.entity.AlienEntity;
+import com.futuremod.entity.AlienKnightEntity;
 import com.futuremod.entity.AlienShieldbearerEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.ArmedModel;
@@ -27,6 +28,7 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
     private final ModelPart head;
     private final ModelPart antennaR;
     private final ModelPart antennaL;
+    private final ModelPart crest;
     private final ModelPart rightArm;
     private final ModelPart club;
     private final ModelPart spear;
@@ -39,6 +41,7 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
         this.head = root.getChild("head");
         this.antennaR = this.head.getChild("antenna_r");
         this.antennaL = this.head.getChild("antenna_l");
+        this.crest = this.head.getChild("crest");
         this.rightArm = root.getChild("right_arm");
         this.leftArm = root.getChild("left_arm");
         this.club = this.rightArm.getChild("club");
@@ -72,6 +75,11 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
                         .texOffs(0, 46).addBox(-0.5F, -5.0F, -0.5F, 1.0F, 5.0F, 1.0F)
                         .texOffs(4, 46).addBox(-1.0F, -7.0F, -1.0F, 2.0F, 2.0F, 2.0F),
                 PartPose.offsetAndRotation(2.5F, -13.0F, -1.0F, -0.15F, 0.0F, 0.35F));
+
+        // Cresta del Verdiano caballero (solo la usa el)
+        head.addOrReplaceChild("crest",
+                CubeListBuilder.create().texOffs(40, 52).addBox(-1.0F, -16.0F, -4.0F, 2.0F, 3.0F, 8.0F),
+                PartPose.ZERO);
 
         // Torso encorvado (pivote en la cadera)
         PartDefinition body = root.addOrReplaceChild("body",
@@ -165,8 +173,10 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
         // El arquero no lleva garrote: sostiene un arco y apunta con ambos brazos
         boolean archer = entity instanceof AlienArcherEntity;
         boolean shielded = entity instanceof AlienShieldbearerEntity;
-        this.club.visible = !archer && !shielded;
+        boolean knight = entity instanceof AlienKnightEntity;
+        this.club.visible = !archer && !shielded && !knight;
         this.spear.visible = shielded;
+        this.crest.visible = knight;
         if (archer && entity.isAggressive()) {
             this.rightArm.yRot = -0.1F + this.head.yRot;
             this.leftArm.yRot = 0.1F + this.head.yRot + 0.4F;
@@ -185,6 +195,23 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
             this.spear.y += thrust * 4.0F;
             this.leftArm.xRot = -0.35F;
             this.leftArm.zRot = -0.05F;
+        }
+
+        // El caballero blande la espada y lleva el escudo al frente
+        if (knight && entity.isAggressive()) {
+            float slash = Mth.sin(this.attackTime * (float) Math.PI);
+            this.rightArm.xRot = -1.1F + slash * 1.3F;
+            this.rightArm.zRot = 0.0F;
+            this.leftArm.xRot = -0.35F;
+            this.leftArm.zRot = -0.05F;
+        }
+
+        // Montado: piernas hacia delante, abiertas
+        if (this.riding) {
+            this.rightLeg.xRot = -1.4137167F;
+            this.leftLeg.xRot = -1.4137167F;
+            this.rightLeg.yRot = 0.31415927F;
+            this.leftLeg.yRot = -0.31415927F;
         }
     }
 

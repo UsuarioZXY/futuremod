@@ -34,5 +34,9 @@
   "item.futuremod.steel_hoe": "Azada de acero",
   "item.futuremod.primitive_shield": "Escudo primitivo",
   "entity.futuremod.alien_shieldbearer": "Verdiano escudero",
-  "item.futuremod.alien_shieldbearer_spawn_egg": "Generar Verdiano escudero"
+  "item.futuremod.alien_shieldbearer_spawn_egg": "Generar Verdiano escudero",
+  "entity.futuremod.alien_knight": "Verdiano caballero",
+  "entity.futuremod.rodia": "Rodia",
+  "item.futuremod.alien_knight_spawn_egg": "Generar Verdiano caballero",
+  "item.futuremod.rodia_spawn_egg": "Generar Rodia"
 }

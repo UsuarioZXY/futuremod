@@ -34,7 +34,7 @@ public class ForgeEvents {
     /** Un alienigena nunca hace dano a otro (golpes, flechas...), asi no hay represalias entre ellos. */
     @SubscribeEvent
     public static void onAttack(LivingAttackEvent event) {
-        if (event.getEntity() instanceof AlienEntity && event.getSource().getEntity() instanceof AlienEntity) {
+        if (AlienEntity.isKin(event.getEntity()) && AlienEntity.isKin(event.getSource().getEntity())) {
             event.setCanceled(true);
         }
     }

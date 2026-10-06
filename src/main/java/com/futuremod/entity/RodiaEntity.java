@@ -6,7 +6,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -27,81 +26,77 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
-/** Alienigena primitivo: aparece en grupos de dia y de noche, ataca a todo ser vivo (menos a los suyos). */
-public class AlienEntity extends Monster {
+/** Rodia: bestia alienigena parecida a un dinosaurio. Rapida, fuerte y montura de los Verdianos caballeros. */
+public class RodiaEntity extends Monster {
 
-    public AlienEntity(EntityType<? extends Monster> type, Level level) {
+    public RodiaEntity(EntityType<? extends Monster> type, Level level) {
         super(type, level);
-        this.xpReward = 8;
+        this.xpReward = 15;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
+    public static AttributeSupplier.Builder createRodiaAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 16.0D)
+                .add(Attributes.MAX_HEALTH, 40.0D)
                 .add(Attributes.ATTACK_DAMAGE, 6.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.29D)
+                .add(Attributes.MOVEMENT_SPEED, 0.30D)
                 .add(Attributes.FOLLOW_RANGE, 32.0D)
                 .add(Attributes.ARMOR, 4.0D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.25D);
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.6D);
     }
 
-    /** Reglas de aparicion: no piden oscuridad, asi que salen tambien de dia. */
-    public static <T extends AlienEntity> boolean checkAlienSpawnRules(EntityType<T> type, ServerLevelAccessor level,
+    public static boolean checkRodiaSpawnRules(EntityType<RodiaEntity> type, ServerLevelAccessor level,
                                                MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return level.getDifficulty() != Difficulty.PEACEFUL
                 && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
     }
 
-    /** Permite manadas de hasta 7. */
     @Override
     public int getMaxSpawnClusterSize() {
-        return 7;
+        return 2;
     }
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.15D, false));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, true));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.9D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 10.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-        // Si hieren a uno, toda la manada cercana ataca
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
-        // Prioridad a los jugadores
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-        // Hostiles a todo lo demas que este vivo (aldeanos, animales, otros monstruos...), menos a su especie
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false,
-                target -> !(target instanceof AlienEntity) && !(target instanceof ArmorStand)));
+                target -> !AlienEntity.isKin(target) && !(target instanceof ArmorStand)));
     }
 
-    /** Todos los alienigenas son de la misma raza: nunca se atacan entre si. */
+    /** Los Verdianos y los Rodia son aliados: no se atacan entre si. */
     @Override
     public boolean canAttack(LivingEntity target) {
-        return !isKin(target) && super.canAttack(target);
+        return !AlienEntity.isKin(target) && super.canAttack(target);
     }
 
-    /** true si es un Verdiano o un Rodia (todos son aliados). */
-    public static boolean isKin(Entity entity) {
-        return entity instanceof AlienEntity || entity instanceof RodiaEntity;
+    /** Altura a la que se sienta el jinete (el Verdiano caballero). */
+    @Override
+    public double getPassengersRidingOffset() {
+        return 0.5D;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENDERMITE_AMBIENT;
+        return SoundEvents.RAVAGER_AMBIENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENDERMITE_HURT;
+        return SoundEvents.RAVAGER_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENDERMITE_DEATH;
+        return SoundEvents.RAVAGER_DEATH;
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.ZOMBIE_STEP, 0.15F, 1.0F);
+        this.playSound(SoundEvents.RAVAGER_STEP, 0.15F, 1.0F);
     }
 }

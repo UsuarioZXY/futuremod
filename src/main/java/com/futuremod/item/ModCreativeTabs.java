@@ -49,6 +49,8 @@ public class ModCreativeTabs {
                         output.accept(ModItems.ALIEN_SPAWN_EGG.get());
                         output.accept(ModItems.ALIEN_ARCHER_SPAWN_EGG.get());
                         output.accept(ModItems.ALIEN_SHIELDBEARER_SPAWN_EGG.get());
+                        output.accept(ModItems.ALIEN_KNIGHT_SPAWN_EGG.get());
+                        output.accept(ModItems.RODIA_SPAWN_EGG.get());
                     })
                     .build());
 }

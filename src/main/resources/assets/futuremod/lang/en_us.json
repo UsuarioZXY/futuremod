@@ -34,5 +34,9 @@
   "item.futuremod.steel_hoe": "Steel Hoe",
   "item.futuremod.primitive_shield": "Primitive Shield",
   "entity.futuremod.alien_shieldbearer": "Verdian Shieldbearer",
-  "item.futuremod.alien_shieldbearer_spawn_egg": "Verdian Shieldbearer Spawn Egg"
+  "item.futuremod.alien_shieldbearer_spawn_egg": "Verdian Shieldbearer Spawn Egg",
+  "entity.futuremod.alien_knight": "Verdian Knight",
+  "entity.futuremod.rodia": "Rodia",
+  "item.futuremod.alien_knight_spawn_egg": "Verdian Knight Spawn Egg",
+  "item.futuremod.rodia_spawn_egg": "Rodia Spawn Egg"
 }
