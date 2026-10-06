@@ -20,6 +20,11 @@
   "item.futuremod.primitive_thread": "Hilo primitivo",
   "item.futuremod.broken_bone": "Hueso roto",
   "item.futuremod.primitive_bow": "Arco primitivo",
+  "item.futuremod.primitive_arrow": "Flecha primitiva",
+  "item.futuremod.alien_archer_spawn_egg": "Generar alienígena arquero",
+  "entity.futuremod.alien_archer": "Alienígena arquero",
+  "entity.futuremod.primitive_arrow": "Flecha primitiva",
+  "effect.futuremod.bleeding": "Sangrado",
   "item.futuremod.steel_ingot": "Lingote de acero",
   "creativetab.futuremod.future_tab": "Future Mod"
 }

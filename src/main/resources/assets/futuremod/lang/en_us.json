@@ -20,6 +20,11 @@
   "item.futuremod.primitive_thread": "Primitive Thread",
   "item.futuremod.broken_bone": "Broken Bone",
   "item.futuremod.primitive_bow": "Primitive Bow",
+  "item.futuremod.primitive_arrow": "Primitive Arrow",
+  "item.futuremod.alien_archer_spawn_egg": "Alien Archer Spawn Egg",
+  "entity.futuremod.alien_archer": "Alien Archer",
+  "entity.futuremod.primitive_arrow": "Primitive Arrow",
+  "effect.futuremod.bleeding": "Bleeding",
   "item.futuremod.steel_ingot": "Steel Ingot",
   "creativetab.futuremod.future_tab": "Future Mod"
 }
