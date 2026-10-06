@@ -25,6 +25,7 @@
   "entity.futuremod.alien_archer": "Alienígena arquero",
   "entity.futuremod.primitive_arrow": "Flecha primitiva",
   "effect.futuremod.bleeding": "Sangrado",
+  "item.futuremod.steel_sword": "Espada de acero",
   "item.futuremod.steel_ingot": "Lingote de acero",
   "creativetab.futuremod.future_tab": "Future Mod"
 }

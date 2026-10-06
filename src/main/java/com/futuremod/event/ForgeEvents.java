@@ -3,13 +3,17 @@ package com.futuremod.event;
 import com.futuremod.FutureMod;
 import com.futuremod.effect.ModEffects;
 import com.futuremod.entity.AlienEntity;
+import com.futuremod.item.SteelArmorItem;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-/** Reglas del sangrado (no se cura, no deja regenerar) y paz entre alienigenas. */
+/** Sangrado, paz entre alienigenas y proteccion contra flechas con la armadura completa. */
 @Mod.EventBusSubscriber(modid = FutureMod.MODID)
 public class ForgeEvents {
 
@@ -31,6 +35,16 @@ public class ForgeEvents {
     @SubscribeEvent
     public static void onAttack(LivingAttackEvent event) {
         if (event.getEntity() instanceof AlienEntity && event.getSource().getEntity() instanceof AlienEntity) {
+            event.setCanceled(true);
+        }
+    }
+
+    /** Con el set completo de acero las flechas no hacen nada (los demas proyectiles si; el tridente tampoco se bloquea). */
+    @SubscribeEvent
+    public static void onArrowAttack(LivingAttackEvent event) {
+        Entity direct = event.getSource().getDirectEntity();
+        if (direct instanceof AbstractArrow && !(direct instanceof ThrownTrident)
+                && SteelArmorItem.isWearingFullSet(event.getEntity())) {
             event.setCanceled(true);
         }
     }

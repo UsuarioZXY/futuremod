@@ -32,6 +32,7 @@ public class ModCreativeTabs {
                         output.accept(ModItems.STEEL_CHESTPLATE.get());
                         output.accept(ModItems.STEEL_LEGGINGS.get());
                         output.accept(ModItems.STEEL_BOOTS.get());
+                        output.accept(ModItems.STEEL_SWORD.get());
                         output.accept(ModItems.ALIEN_BONE.get());
                         output.accept(ModItems.BROKEN_BONE.get());
                         output.accept(ModItems.PRIMITIVE_CLOTH_FRAGMENT.get());

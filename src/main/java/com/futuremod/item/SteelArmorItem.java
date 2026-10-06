@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import java.util.EnumMap;
 import java.util.UUID;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -56,5 +57,13 @@ public class SteelArmorItem extends ArmorItem {
                     AttributeModifier.Operation.MULTIPLY_BASE));
         }
         return builder.build();
+    }
+
+    /** true si lleva casco, peto, pantalones y botas de acero. */
+    public static boolean isWearingFullSet(LivingEntity entity) {
+        return entity.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof SteelArmorItem
+                && entity.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof SteelArmorItem
+                && entity.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof SteelArmorItem
+                && entity.getItemBySlot(EquipmentSlot.FEET).getItem() instanceof SteelArmorItem;
     }
 }

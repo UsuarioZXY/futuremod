@@ -4,6 +4,7 @@ import com.futuremod.FutureMod;
 import com.futuremod.entity.ModEntities;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
@@ -67,6 +68,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> BROKEN_BONE =
             ITEMS.register("broken_bone", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> STEEL_SWORD =
+            ITEMS.register("steel_sword", () -> new SwordItem(ModTiers.STEEL, 3, -2.4F, new Item.Properties()));
 
     public static final RegistryObject<Item> PRIMITIVE_BOW =
             ITEMS.register("primitive_bow", () -> new BowItem(new Item.Properties().durability(400)));
