@@ -45,8 +45,10 @@ public class ModCreativeTabs {
                         output.accept(ModItems.PRIMITIVE_THREAD.get());
                         output.accept(ModItems.PRIMITIVE_BOW.get());
                         output.accept(ModItems.PRIMITIVE_ARROW.get());
+                        output.accept(ModItems.PRIMITIVE_SHIELD.get());
                         output.accept(ModItems.ALIEN_SPAWN_EGG.get());
                         output.accept(ModItems.ALIEN_ARCHER_SPAWN_EGG.get());
+                        output.accept(ModItems.ALIEN_SHIELDBEARER_SPAWN_EGG.get());
                     })
                     .build());
 }

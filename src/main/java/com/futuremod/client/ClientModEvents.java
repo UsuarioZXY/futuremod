@@ -14,7 +14,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 @Mod.EventBusSubscriber(modid = FutureMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientModEvents {
 
-    /** Animacion del arco al tensarlo (igual que el arco normal). */
+    /** Animaciones del arco al tensarlo y del escudo al bloquear (igual que los normales). */
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
@@ -29,6 +29,9 @@ public class ClientModEvents {
             ItemProperties.register(ModItems.PRIMITIVE_BOW.get(), new ResourceLocation("pulling"),
                     (stack, level, entity, seed) ->
                             entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
+            ItemProperties.register(ModItems.PRIMITIVE_SHIELD.get(), new ResourceLocation("blocking"),
+                    (stack, level, entity, seed) ->
+                            entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
         });
     }
 
@@ -41,6 +44,7 @@ public class ClientModEvents {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.ALIEN.get(), AlienRenderer::new);
         event.registerEntityRenderer(ModEntities.ALIEN_ARCHER.get(), AlienArcherRenderer::new);
+        event.registerEntityRenderer(ModEntities.ALIEN_SHIELDBEARER.get(), AlienShieldbearerRenderer::new);
         event.registerEntityRenderer(ModEntities.PRIMITIVE_ARROW.get(), PrimitiveArrowRenderer::new);
     }
 }

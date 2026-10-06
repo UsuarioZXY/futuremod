@@ -24,6 +24,12 @@ public class ModEntities {
                     .clientTrackingRange(8)
                     .build(new ResourceLocation(FutureMod.MODID, "alien_archer").toString()));
 
+    public static final RegistryObject<EntityType<AlienShieldbearerEntity>> ALIEN_SHIELDBEARER = ENTITIES.register("alien_shieldbearer",
+            () -> EntityType.Builder.of(AlienShieldbearerEntity::new, MobCategory.MONSTER)
+                    .sized(0.7F, 1.95F)
+                    .clientTrackingRange(8)
+                    .build(new ResourceLocation(FutureMod.MODID, "alien_shieldbearer").toString()));
+
     public static final RegistryObject<EntityType<PrimitiveArrow>> PRIMITIVE_ARROW = ENTITIES.register("primitive_arrow",
             () -> EntityType.Builder.<PrimitiveArrow>of(PrimitiveArrow::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)

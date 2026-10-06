@@ -13,7 +13,7 @@ public class GuideBook {
             "\u00a7l\u00a7nFUTURE MOD\u00a7r\n\n\u00a7oLibro de recetas\u00a7r\n\nAqu\u00ed aprender\u00e1s a fabricar todo lo del mod en la mesa de crafteo.\n\n- = casilla vac\u00eda",
             "\u00a7l\u00cdndice\u00a7r\n5 Mena de acero\n6 Lingote y pepitas\n7 Chip de acero\n8 Motor de acero\n9 N\u00facleo de acero\n10 Cristal reforzado\n11 Vara de acero\n12 Casco\n13 Peto",
             "\u00a7l\u00cdndice\u00a7r\n14 Pantalones\n15 Botas\n16 Set completo\n17 Espada\n18 Pico\n19 Hacha\n20 Pala\n21 Azada\n22 Herramientas",
-            "\u00a7l\u00cdndice\u00a7r\n23 Tela primitiva\n24 Hilo primitivo\n25 Arco primitivo\n26 Flecha primitiva\n27 Sangrado\n28 Verdiano guerrero\n29 Verdiano arquero",
+            "\u00a7l\u00cdndice\u00a7r\n23 Tela primitiva\n24 Hilo primitivo\n25 Arco primitivo\n26 Flecha primitiva\n27 Escudo primitivo\n28 Sangrado\n29 Verdiano guerrero\n30 Verdiano arquero\n31 Verdiano escudero",
             "\u00a7lMena de acero\u00a7r\n\nSe encuentra bajo tierra entre las capas -64 y 40, en piedra y en pizarra abismal.\n\nR\u00f3mpela con un pico de piedra o mejor: suelta acero sin cocer.",
             "\u00a7lLingote de acero\u00a7r\n\nCocina el acero sin cocer en un ALTO HORNO.\n\n\u00a7oEl horno normal no sirve.\u00a7r\n\n1 lingote = 9 pepitas\n9 pepitas = 1 lingote",
             "\u00a7lChip de acero\u00a7r\nL - L\nS T S\nR S R\n\nL=pararrayos\nS=lingote de acero\nT=antorcha redstone\nR=polvo de redstone",
@@ -36,9 +36,11 @@ public class GuideBook {
             "\u00a7lHilo primitivo\u00a7r\n- F -\nF S F\n- F -\n\nF=fragmento de tela primitiva\nS=hilo normal",
             "\u00a7lArco primitivo\u00a7r\nB A T\nA - T\nB A T\n\nB=hueso roto\nA=hueso de alien\u00edgena\nT=hilo primitivo",
             "\u00a7lFlecha primitiva\u00a7r\nB N -\nN A T\n- T C\n\nB=hueso roto\nN=pepita de acero\nA=hueso de alien\u00edgena\nT=hilo primitivo\nC=trozo de tela primitiva\n\nDa 8 flechas.",
+            "\u00a7lEscudo primitivo\u00a7r\nA C A\nI C I\nT A T\n\nA=hueso de alien\u00edgena\nC=trozo de tela primitiva\nI=lingote de acero\nT=hilo primitivo\n\nBloquea como un escudo.",
             "\u00a7lSangrado\u00a7r\n\nLas flechas primitivas causan 5 segundos de sangrado: pierdes vida, no puedes regenerarte y la leche no lo cura.",
             "\u00a7lVerdiano guerrero\u00a7r\n\nLleva un garrote de piedra. Tiene 8 corazones y sale en manadas de 3 a 7, de d\u00eda y de noche.\n\nSuelta hueso de alien\u00edgena, hueso roto y tela.",
-            "\u00a7lVerdiano arquero\u00a7r\n\nDispara flechas primitivas con su arco. Sale en grupos de 1 a 3.\n\nLos Verdianos nunca se atacan entre s\u00ed."
+            "\u00a7lVerdiano arquero\u00a7r\n\nDispara flechas primitivas con su arco. Sale en grupos de 1 a 3.\n\nLos Verdianos nunca se atacan entre s\u00ed.",
+            "\u00a7lVerdiano escudero\u00a7r\n\nLleva lanza y escudo primitivo. Ataca desde m\u00e1s lejos (2 corazones de da\u00f1o) y a veces bloquea tus golpes.\n\nSale en grupos de 1 a 3."
     };
 
     public static ItemStack create() {

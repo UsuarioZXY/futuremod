@@ -31,5 +31,8 @@
   "creativetab.futuremod.future_tab": "Future Mod",
   "item.futuremod.steel_axe": "Hacha de acero",
   "item.futuremod.steel_shovel": "Pala de acero",
-  "item.futuremod.steel_hoe": "Azada de acero"
+  "item.futuremod.steel_hoe": "Azada de acero",
+  "item.futuremod.primitive_shield": "Escudo primitivo",
+  "entity.futuremod.alien_shieldbearer": "Verdiano escudero",
+  "item.futuremod.alien_shieldbearer_spawn_egg": "Generar Verdiano escudero"
 }

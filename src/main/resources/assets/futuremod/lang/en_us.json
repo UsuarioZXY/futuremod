@@ -31,5 +31,8 @@
   "creativetab.futuremod.future_tab": "Future Mod",
   "item.futuremod.steel_axe": "Steel Axe",
   "item.futuremod.steel_shovel": "Steel Shovel",
-  "item.futuremod.steel_hoe": "Steel Hoe"
+  "item.futuremod.steel_hoe": "Steel Hoe",
+  "item.futuremod.primitive_shield": "Primitive Shield",
+  "entity.futuremod.alien_shieldbearer": "Verdian Shieldbearer",
+  "item.futuremod.alien_shieldbearer_spawn_egg": "Verdian Shieldbearer Spawn Egg"
 }

@@ -88,6 +88,13 @@ public class ModItems {
     public static final RegistryObject<Item> STEEL_HOE =
             ITEMS.register("steel_hoe", () -> new HoeItem(ModTiers.STEEL, -3, 0.0F, new Item.Properties()));
 
+    public static final RegistryObject<Item> PRIMITIVE_SHIELD =
+            ITEMS.register("primitive_shield", () -> new PrimitiveShieldItem(new Item.Properties().durability(450)));
+
+    public static final RegistryObject<Item> ALIEN_SHIELDBEARER_SPAWN_EGG =
+            ITEMS.register("alien_shieldbearer_spawn_egg",
+                    () -> new ForgeSpawnEggItem(ModEntities.ALIEN_SHIELDBEARER, 0x5C7A4A, 0x9A7048, new Item.Properties()));
+
     public static final RegistryObject<Item> PRIMITIVE_BOW =
             ITEMS.register("primitive_bow", () -> new BowItem(new Item.Properties().durability(400)));
 

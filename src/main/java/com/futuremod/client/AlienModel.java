@@ -3,6 +3,7 @@ package com.futuremod.client;
 import com.futuremod.FutureMod;
 import com.futuremod.entity.AlienArcherEntity;
 import com.futuremod.entity.AlienEntity;
+import com.futuremod.entity.AlienShieldbearerEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HierarchicalModel;
@@ -28,6 +29,7 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
     private final ModelPart antennaL;
     private final ModelPart rightArm;
     private final ModelPart club;
+    private final ModelPart spear;
     private final ModelPart leftArm;
     private final ModelPart rightLeg;
     private final ModelPart leftLeg;
@@ -40,6 +42,7 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
         this.rightArm = root.getChild("right_arm");
         this.leftArm = root.getChild("left_arm");
         this.club = this.rightArm.getChild("club");
+        this.spear = this.rightArm.getChild("spear");
         this.rightLeg = root.getChild("right_leg");
         this.leftLeg = root.getChild("left_leg");
     }
@@ -97,6 +100,12 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
                         .texOffs(40, 30).addBox(-0.5F, -9.0F, -0.5F, 1.0F, 10.0F, 1.0F)
                         .texOffs(44, 30).addBox(-1.5F, -13.0F, -1.5F, 3.0F, 5.0F, 3.0F),
                 PartPose.offsetAndRotation(0.0F, 11.0F, 0.0F, 1.2F, 0.0F, 0.0F));
+        // Lanza (solo la usa el Verdiano escudero): astil largo con punta de piedra
+        rightArm.addOrReplaceChild("spear",
+                CubeListBuilder.create()
+                        .texOffs(58, 0).addBox(-0.5F, -16.0F, -0.5F, 1.0F, 24.0F, 1.0F)
+                        .texOffs(30, 52).addBox(-1.0F, -19.0F, -1.0F, 2.0F, 3.0F, 2.0F),
+                PartPose.offset(0.0F, 11.0F, 0.0F));
         rightArm.addOrReplaceChild("pauldron_r",
                 CubeListBuilder.create().texOffs(16, 46).addBox(-1.0F, -3.0F, -1.0F, 2.0F, 3.0F, 2.0F),
                 PartPose.offsetAndRotation(-0.5F, -0.5F, 0.0F, 0.0F, 0.0F, -0.5F));
@@ -155,7 +164,9 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
 
         // El arquero no lleva garrote: sostiene un arco y apunta con ambos brazos
         boolean archer = entity instanceof AlienArcherEntity;
-        this.club.visible = !archer;
+        boolean shielded = entity instanceof AlienShieldbearerEntity;
+        this.club.visible = !archer && !shielded;
+        this.spear.visible = shielded;
         if (archer && entity.isAggressive()) {
             this.rightArm.yRot = -0.1F + this.head.yRot;
             this.leftArm.yRot = 0.1F + this.head.yRot + 0.4F;
@@ -163,6 +174,17 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
             this.leftArm.xRot = (-(float) Math.PI / 2F) + this.head.xRot;
             this.rightArm.zRot = 0.0F;
             this.leftArm.zRot = 0.0F;
+        }
+
+        // El escudero embiste con la lanza hacia delante y lleva el escudo al frente
+        if (shielded && entity.isAggressive()) {
+            float thrust = Mth.sin(this.attackTime * (float) Math.PI);
+            this.rightArm.xRot = -0.9F - thrust * 0.4F;
+            this.rightArm.zRot = 0.0F;
+            this.spear.xRot = ((float) Math.PI / 2F) - this.rightArm.xRot + 0.1F;
+            this.spear.y += thrust * 4.0F;
+            this.leftArm.xRot = -0.35F;
+            this.leftArm.zRot = -0.05F;
         }
     }
 

@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#minecraft:is_overworld",
+  "spawners": {
+    "type": "futuremod:alien_shieldbearer",
+    "weight": 15,
+    "minCount": 1,
+    "maxCount": 3
+  }
+}
