@@ -73,6 +73,12 @@ public class AlienEntity extends Monster {
                 target -> !(target instanceof AlienEntity) && !(target instanceof ArmorStand)));
     }
 
+    /** Todos los alienigenas son de la misma raza: nunca se atacan entre si. */
+    @Override
+    public boolean canAttack(LivingEntity target) {
+        return !(target instanceof AlienEntity) && super.canAttack(target);
+    }
+
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENDERMITE_AMBIENT;
