@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [ "IIK", " CI", "R I" ],
+  "key": {
+    "I": { "item": "futuremod:steel_ingot" },
+    "K": { "item": "futuremod:steel_core" },
+    "C": { "item": "futuremod:steel_chip" },
+    "R": { "item": "futuremod:steel_rod" }
+  },
+  "result": { "item": "futuremod:steel_pickaxe" }
+}
