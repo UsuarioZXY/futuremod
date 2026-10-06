@@ -3,8 +3,11 @@ package com.futuremod.item;
 import com.futuremod.FutureMod;
 import com.futuremod.entity.ModEntities;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -75,6 +78,15 @@ public class ModItems {
 
     public static final RegistryObject<Item> STEEL_PICKAXE =
             ITEMS.register("steel_pickaxe", () -> new PickaxeItem(ModTiers.STEEL, 1, -2.8F, new Item.Properties()));
+
+    public static final RegistryObject<Item> STEEL_AXE =
+            ITEMS.register("steel_axe", () -> new AxeItem(ModTiers.STEEL, 5.0F, -3.0F, new Item.Properties()));
+
+    public static final RegistryObject<Item> STEEL_SHOVEL =
+            ITEMS.register("steel_shovel", () -> new ShovelItem(ModTiers.STEEL, 1.5F, -3.0F, new Item.Properties()));
+
+    public static final RegistryObject<Item> STEEL_HOE =
+            ITEMS.register("steel_hoe", () -> new HoeItem(ModTiers.STEEL, -3, 0.0F, new Item.Properties()));
 
     public static final RegistryObject<Item> PRIMITIVE_BOW =
             ITEMS.register("primitive_bow", () -> new BowItem(new Item.Properties().durability(400)));

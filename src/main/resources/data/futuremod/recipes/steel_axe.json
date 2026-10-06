@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [ " KI", " MI", " R " ],
+  "key": {
+    "K": { "item": "futuremod:steel_core" },
+    "I": { "item": "futuremod:steel_ingot" },
+    "M": { "item": "futuremod:steel_motor" },
+    "R": { "item": "futuremod:steel_rod" }
+  },
+  "result": { "item": "futuremod:steel_axe" }
+}

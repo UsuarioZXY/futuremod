@@ -18,6 +18,7 @@ public class ModCreativeTabs {
                     .title(Component.translatable("creativetab.futuremod.future_tab"))
                     .icon(() -> new ItemStack(ModItems.STEEL_INGOT.get()))
                     .displayItems((params, output) -> {
+                        output.accept(GuideBook.create());
                         output.accept(ModBlocks.STEEL_ORE.get());
                         output.accept(ModBlocks.DEEPSLATE_STEEL_ORE.get());
                         output.accept(ModItems.RAW_STEEL.get());
@@ -34,6 +35,9 @@ public class ModCreativeTabs {
                         output.accept(ModItems.STEEL_BOOTS.get());
                         output.accept(ModItems.STEEL_SWORD.get());
                         output.accept(ModItems.STEEL_PICKAXE.get());
+                        output.accept(ModItems.STEEL_AXE.get());
+                        output.accept(ModItems.STEEL_SHOVEL.get());
+                        output.accept(ModItems.STEEL_HOE.get());
                         output.accept(ModItems.ALIEN_BONE.get());
                         output.accept(ModItems.BROKEN_BONE.get());
                         output.accept(ModItems.PRIMITIVE_CLOTH_FRAGMENT.get());
