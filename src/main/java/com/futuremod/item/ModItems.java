@@ -103,6 +103,13 @@ public class ModItems {
             ITEMS.register("rodia_spawn_egg",
                     () -> new ForgeSpawnEggItem(ModEntities.RODIA, 0x4E6B55, 0xE0B050, new Item.Properties()));
 
+    public static final RegistryObject<Item> PRIMITIVE_SWORD =
+            ITEMS.register("primitive_sword", () -> new SwordItem(ModTiers.PRIMITIVE, 3, -2.4F, new Item.Properties()));
+
+    public static final RegistryObject<Item> ALIEN_HEALER_SPAWN_EGG =
+            ITEMS.register("alien_healer_spawn_egg",
+                    () -> new ForgeSpawnEggItem(ModEntities.ALIEN_HEALER, 0x7FBF9A, 0xF0E6C0, new Item.Properties()));
+
     public static final RegistryObject<Item> PRIMITIVE_BOW =
             ITEMS.register("primitive_bow", () -> new BowItem(new Item.Properties().durability(400)));
 

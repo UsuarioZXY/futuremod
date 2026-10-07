@@ -47,6 +47,7 @@ public class ClientModEvents {
         event.registerEntityRenderer(ModEntities.ALIEN_ARCHER.get(), AlienArcherRenderer::new);
         event.registerEntityRenderer(ModEntities.ALIEN_SHIELDBEARER.get(), AlienShieldbearerRenderer::new);
         event.registerEntityRenderer(ModEntities.ALIEN_KNIGHT.get(), AlienKnightRenderer::new);
+        event.registerEntityRenderer(ModEntities.ALIEN_HEALER.get(), AlienHealerRenderer::new);
         event.registerEntityRenderer(ModEntities.RODIA.get(), RodiaRenderer::new);
         event.registerEntityRenderer(ModEntities.PRIMITIVE_ARROW.get(), PrimitiveArrowRenderer::new);
     }

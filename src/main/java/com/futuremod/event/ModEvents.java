@@ -3,6 +3,7 @@ package com.futuremod.event;
 import com.futuremod.FutureMod;
 import com.futuremod.entity.AlienArcherEntity;
 import com.futuremod.entity.AlienEntity;
+import com.futuremod.entity.AlienHealerEntity;
 import com.futuremod.entity.AlienKnightEntity;
 import com.futuremod.entity.AlienShieldbearerEntity;
 import com.futuremod.entity.ModEntities;
@@ -23,6 +24,7 @@ public class ModEvents {
         event.put(ModEntities.ALIEN_ARCHER.get(), AlienArcherEntity.createArcherAttributes().build());
         event.put(ModEntities.ALIEN_SHIELDBEARER.get(), AlienShieldbearerEntity.createShieldAttributes().build());
         event.put(ModEntities.ALIEN_KNIGHT.get(), AlienKnightEntity.createKnightAttributes().build());
+        event.put(ModEntities.ALIEN_HEALER.get(), AlienHealerEntity.createHealerAttributes().build());
         event.put(ModEntities.RODIA.get(), RodiaEntity.createRodiaAttributes().build());
     }
 
@@ -38,6 +40,9 @@ public class ModEvents {
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AlienEntity::checkAlienSpawnRules,
                 SpawnPlacementRegisterEvent.Operation.OR);
         event.register(ModEntities.ALIEN_KNIGHT.get(), SpawnPlacements.Type.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AlienEntity::checkAlienSpawnRules,
+                SpawnPlacementRegisterEvent.Operation.OR);
+        event.register(ModEntities.ALIEN_HEALER.get(), SpawnPlacements.Type.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AlienEntity::checkAlienSpawnRules,
                 SpawnPlacementRegisterEvent.Operation.OR);
         event.register(ModEntities.RODIA.get(), SpawnPlacements.Type.ON_GROUND,

@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
-/** Verdiano caballero: armadura, espada y escudo. Aparece montado sobre un Rodia. */
+/** Verdiano caballero: armadura y espada primitivas y escudo. Aparece montado sobre un Rodia. */
 public class AlienKnightEntity extends AlienEntity {
 
     public AlienKnightEntity(EntityType<? extends Monster> type, Level level) {
@@ -55,10 +55,8 @@ public class AlienKnightEntity extends AlienEntity {
 
     @Override
     protected void populateDefaultEquipmentSlots(RandomSource random, DifficultyInstance difficulty) {
-        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.STEEL_SWORD.get()));
+        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.PRIMITIVE_SWORD.get()));
         this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(ModItems.PRIMITIVE_SHIELD.get()));
-        // la espada de acero no se suelta, para no regalarla
-        this.setDropChance(EquipmentSlot.MAINHAND, 0.0F);
     }
 
     /** 30% de probabilidad de bloquear un golpe o una flecha con el escudo. */

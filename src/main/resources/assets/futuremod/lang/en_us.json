@@ -38,5 +38,8 @@
   "entity.futuremod.alien_knight": "Verdian Knight",
   "entity.futuremod.rodia": "Rodia",
   "item.futuremod.alien_knight_spawn_egg": "Verdian Knight Spawn Egg",
-  "item.futuremod.rodia_spawn_egg": "Rodia Spawn Egg"
+  "item.futuremod.rodia_spawn_egg": "Rodia Spawn Egg",
+  "item.futuremod.primitive_sword": "Primitive Sword",
+  "entity.futuremod.alien_healer": "Verdian Healer",
+  "item.futuremod.alien_healer_spawn_egg": "Verdian Healer Spawn Egg"
 }

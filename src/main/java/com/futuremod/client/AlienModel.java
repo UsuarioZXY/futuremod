@@ -3,6 +3,7 @@ package com.futuremod.client;
 import com.futuremod.FutureMod;
 import com.futuremod.entity.AlienArcherEntity;
 import com.futuremod.entity.AlienEntity;
+import com.futuremod.entity.AlienHealerEntity;
 import com.futuremod.entity.AlienKnightEntity;
 import com.futuremod.entity.AlienShieldbearerEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -32,6 +33,7 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
     private final ModelPart rightArm;
     private final ModelPart club;
     private final ModelPart spear;
+    private final ModelPart scepter;
     private final ModelPart leftArm;
     private final ModelPart rightLeg;
     private final ModelPart leftLeg;
@@ -46,6 +48,7 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
         this.leftArm = root.getChild("left_arm");
         this.club = this.rightArm.getChild("club");
         this.spear = this.rightArm.getChild("spear");
+        this.scepter = this.rightArm.getChild("scepter");
         this.rightLeg = root.getChild("right_leg");
         this.leftLeg = root.getChild("left_leg");
     }
@@ -114,6 +117,12 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
                         .texOffs(58, 0).addBox(-0.5F, -16.0F, -0.5F, 1.0F, 24.0F, 1.0F)
                         .texOffs(30, 52).addBox(-1.0F, -19.0F, -1.0F, 2.0F, 3.0F, 2.0F),
                 PartPose.offset(0.0F, 11.0F, 0.0F));
+        // Cetro del curandero: baston con orbe brillante en la punta
+        rightArm.addOrReplaceChild("scepter",
+                CubeListBuilder.create()
+                        .texOffs(56, 26).addBox(-0.5F, -18.0F, -0.5F, 1.0F, 24.0F, 1.0F)
+                        .texOffs(44, 38).addBox(-1.5F, -21.0F, -1.5F, 3.0F, 3.0F, 3.0F),
+                PartPose.offset(0.0F, 11.0F, 0.0F));
         rightArm.addOrReplaceChild("pauldron_r",
                 CubeListBuilder.create().texOffs(16, 46).addBox(-1.0F, -3.0F, -1.0F, 2.0F, 3.0F, 2.0F),
                 PartPose.offsetAndRotation(-0.5F, -0.5F, 0.0F, 0.0F, 0.0F, -0.5F));
@@ -174,7 +183,9 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
         boolean archer = entity instanceof AlienArcherEntity;
         boolean shielded = entity instanceof AlienShieldbearerEntity;
         boolean knight = entity instanceof AlienKnightEntity;
-        this.club.visible = !archer && !shielded && !knight;
+        boolean healer = entity instanceof AlienHealerEntity;
+        this.club.visible = !archer && !shielded && !knight && !healer;
+        this.scepter.visible = healer;
         this.spear.visible = shielded;
         this.crest.visible = knight;
         if (archer && entity.isAggressive()) {
@@ -204,6 +215,12 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
             this.rightArm.zRot = 0.0F;
             this.leftArm.xRot = -0.35F;
             this.leftArm.zRot = -0.05F;
+        }
+
+        // El curandero sostiene el cetro con el brazo un poco adelantado
+        if (healer) {
+            this.rightArm.xRot = -0.35F + Mth.sin(ageInTicks * 0.05F) * 0.05F;
+            this.rightArm.zRot = 0.05F;
         }
 
         // Montado: piernas hacia delante, abiertas

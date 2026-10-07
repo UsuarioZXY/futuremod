@@ -38,5 +38,8 @@
   "entity.futuremod.alien_knight": "Verdiano caballero",
   "entity.futuremod.rodia": "Rodia",
   "item.futuremod.alien_knight_spawn_egg": "Generar Verdiano caballero",
-  "item.futuremod.rodia_spawn_egg": "Generar Rodia"
+  "item.futuremod.rodia_spawn_egg": "Generar Rodia",
+  "item.futuremod.primitive_sword": "Espada primitiva",
+  "entity.futuremod.alien_healer": "Verdiano curandero",
+  "item.futuremod.alien_healer_spawn_egg": "Generar Verdiano curandero"
 }

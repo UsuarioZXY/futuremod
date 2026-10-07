@@ -9,4 +9,8 @@ public class ModTiers {
     // nivel de mineria 3 (como diamante), 2200 usos, velocidad 8, +3.5 de dano, encantabilidad 12
     public static final Tier STEEL = new ForgeTier(3, 2200, 8.0F, 3.5F, 12,
             BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ModItems.STEEL_INGOT.get()));
+
+    // primitivo: nivel de piedra, 220 usos, +1 de dano; se repara con huesos de alienigena
+    public static final Tier PRIMITIVE = new ForgeTier(1, 220, 5.0F, 1.0F, 8,
+            BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ModItems.ALIEN_BONE.get()));
 }

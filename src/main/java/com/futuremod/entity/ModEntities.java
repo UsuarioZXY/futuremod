@@ -36,6 +36,12 @@ public class ModEntities {
                     .clientTrackingRange(8)
                     .build(new ResourceLocation(FutureMod.MODID, "alien_knight").toString()));
 
+    public static final RegistryObject<EntityType<AlienHealerEntity>> ALIEN_HEALER = ENTITIES.register("alien_healer",
+            () -> EntityType.Builder.of(AlienHealerEntity::new, MobCategory.MONSTER)
+                    .sized(0.7F, 1.95F)
+                    .clientTrackingRange(8)
+                    .build(new ResourceLocation(FutureMod.MODID, "alien_healer").toString()));
+
     public static final RegistryObject<EntityType<RodiaEntity>> RODIA = ENTITIES.register("rodia",
             () -> EntityType.Builder.of(RodiaEntity::new, MobCategory.MONSTER)
                     .sized(1.4F, 1.6F)

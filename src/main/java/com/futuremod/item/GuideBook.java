@@ -14,7 +14,7 @@ public class GuideBook {
             "\u00a7l\u00cdndice\u00a7r\n6 Mena de acero\n7 Lingote y pepitas\n8 Chip de acero\n9 Motor de acero\n10 N\u00facleo de acero\n11 Cristal reforzado\n12 Vara de acero\n13 Casco\n14 Peto",
             "\u00a7l\u00cdndice\u00a7r\n15 Pantalones\n16 Botas\n17 Set completo\n18 Espada\n19 Pico\n20 Hacha\n21 Pala\n22 Azada\n23 Herramientas",
             "\u00a7l\u00cdndice\u00a7r\n24 Tela primitiva\n25 Hilo primitivo\n26 Arco primitivo\n27 Flecha primitiva\n28 Escudo primitivo\n29 Sangrado\n30 Verdiano guerrero\n31 Verdiano arquero\n32 Verdiano escudero",
-            "\u00a7l\u00cdndice\u00a7r\n33 Verdiano caballero\n34 Rodia",
+            "\u00a7l\u00cdndice\u00a7r\n33 Verdiano caballero\n34 Rodia\n35 Verdiano curandero",
             "\u00a7lMena de acero\u00a7r\n\nSe encuentra bajo tierra entre las capas -64 y 40, en piedra y en pizarra abismal.\n\nR\u00f3mpela con un pico de piedra o mejor: suelta acero sin cocer.",
             "\u00a7lLingote de acero\u00a7r\n\nCocina el acero sin cocer en un ALTO HORNO.\n\n\u00a7oEl horno normal no sirve.\u00a7r\n\n1 lingote = 9 pepitas\n9 pepitas = 1 lingote",
             "\u00a7lChip de acero\u00a7r\nL - L\nS T S\nR S R\n\nL=pararrayos\nS=lingote de acero\nT=antorcha redstone\nR=polvo de redstone",
@@ -42,8 +42,9 @@ public class GuideBook {
             "\u00a7lVerdiano guerrero\u00a7r\n\nLleva un garrote de piedra. Tiene 8 corazones y sale en manadas de 3 a 7, de d\u00eda y de noche.\n\nSuelta hueso de alien\u00edgena, hueso roto y tela.",
             "\u00a7lVerdiano arquero\u00a7r\n\nDispara flechas primitivas con su arco. Sale en grupos de 1 a 3.\n\nLos Verdianos nunca se atacan entre s\u00ed.",
             "\u00a7lVerdiano escudero\u00a7r\n\nLleva lanza y escudo primitivo. Ataca desde m\u00e1s lejos (2 corazones de da\u00f1o) y a veces bloquea tus golpes.\n\nSale en grupos de 1 a 3.",
-            "\u00a7lVerdiano caballero\u00a7r\n\nLleva armadura, espada y escudo (a veces bloquea tus golpes) y cabalga sobre un Rodia.\n\nSale de d\u00eda y de noche.",
-            "\u00a7lRodia\u00a7r\n\nBestia alien\u00edgena parecida a un dinosaurio. Es r\u00e1pida y fuerte (20 corazones).\n\nSale sola o con un Verdiano caballero encima."
+            "\u00a7lVerdiano caballero\u00a7r\n\nLleva armadura y espada primitivas y escudo (a veces bloquea tus golpes). Cabalga sobre un Rodia.\n\nSale de d\u00eda y de noche.",
+            "\u00a7lRodia\u00a7r\n\nBestia alien\u00edgena parecida a un dinosaurio. Es r\u00e1pida y fuerte (15 corazones).\n\nSale sola o con un Verdiano caballero encima.",
+            "\u00a7lVerdiano curandero\u00a7r\n\nLleva un cetro y cura a los Verdianos y Rodias cercanos. No ataca.\n\nSale en grupos de 1 a 2."
     };
 
     public static ItemStack create() {
