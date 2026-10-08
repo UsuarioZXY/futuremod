@@ -19,6 +19,7 @@ public class RodiaModel extends HierarchicalModel<RodiaEntity> {
             new ModelLayerLocation(new ResourceLocation(FutureMod.MODID, "rodia"), "main");
 
     private final ModelPart root;
+    private final ModelPart body;
     private final ModelPart neck;
     private final ModelPart head;
     private final ModelPart jaw;
@@ -31,11 +32,11 @@ public class RodiaModel extends HierarchicalModel<RodiaEntity> {
 
     public RodiaModel(ModelPart root) {
         this.root = root;
-        ModelPart body = root.getChild("body");
-        this.neck = body.getChild("neck");
+        this.body = root.getChild("body");
+        this.neck = this.body.getChild("neck");
         this.head = this.neck.getChild("head");
         this.jaw = this.head.getChild("jaw");
-        this.tail1 = body.getChild("tail1");
+        this.tail1 = this.body.getChild("tail1");
         this.tail2 = this.tail1.getChild("tail2");
         this.legFR = root.getChild("leg_fr");
         this.legFL = root.getChild("leg_fl");
@@ -118,22 +119,36 @@ public class RodiaModel extends HierarchicalModel<RodiaEntity> {
                           float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
-        this.head.yRot = netHeadYaw * ((float) Math.PI / 180F) * 0.6F;
-        this.head.xRot += headPitch * ((float) Math.PI / 180F) * 0.6F;
+        float pi = (float) Math.PI;
+        float walk = limbSwing * 0.6662F;
+        float amp = Math.min(1.0F, limbSwingAmount);
+        float swing = Mth.cos(walk) * 1.3F * amp;
+        float breathe = Mth.sin(ageInTicks * 0.07F);
+        float bite = Mth.sin(this.attackTime * pi);
+        boolean aggressive = entity.isAggressive();
 
-        float swing = Mth.cos(limbSwing * 0.6662F) * 1.2F * limbSwingAmount;
+        // Patas (trote en diagonal) y rebote del cuerpo
         this.legFR.xRot = swing;
         this.legBL.xRot = swing;
         this.legFL.xRot = -swing;
         this.legBR.xRot = -swing;
+        this.body.y += -Mth.abs(Mth.cos(walk)) * 1.4F * amp;
+        this.body.xRot += Mth.sin(walk * 2.0F) * 0.04F * amp + breathe * 0.01F;
+        this.body.zRot = Mth.cos(walk) * 0.04F * amp;
 
-        // la cola se mueve de lado a lado
-        this.tail1.yRot = Mth.cos(ageInTicks * 0.1F) * 0.15F + swing * 0.15F;
-        this.tail2.yRot = Mth.cos(ageInTicks * 0.1F + 1.0F) * 0.25F;
+        // Cuello y cabeza: siguen la mirada, cabecean al correr, bajan al estar agresivo y se lanzan al morder
+        this.neck.xRot += Mth.cos(walk * 2.0F) * 0.07F * amp + breathe * 0.03F + (aggressive ? 0.2F : 0.0F) - bite * 0.6F;
+        this.neck.yRot = netHeadYaw * (pi / 180F) * 0.3F;
+        this.head.yRot = netHeadYaw * (pi / 180F) * 0.4F;
+        this.head.xRot += headPitch * (pi / 180F) * 0.6F + bite * 0.9F;
 
-        // mandibula: se abre al atacar y se lanza hacia delante
-        float bite = Mth.sin(this.attackTime * (float) Math.PI);
-        this.jaw.xRot = (entity.isAggressive() ? 0.35F + Mth.sin(ageInTicks * 0.5F) * 0.08F : 0.05F) + bite * 0.5F;
-        this.neck.xRot += -bite * 0.5F;
+        // Mandibula: respira, se abre al estar agresivo y se abre del todo al morder
+        this.jaw.xRot = (aggressive ? 0.35F + Mth.sin(ageInTicks * 0.5F) * 0.08F : 0.04F + (breathe + 1.0F) * 0.02F)
+                + bite * 0.6F;
+
+        // Cola: ondula en reposo y se agita al correr
+        this.tail1.yRot = Mth.cos(ageInTicks * 0.1F) * 0.12F + Mth.cos(walk) * 0.2F * amp;
+        this.tail2.yRot = Mth.cos(ageInTicks * 0.1F + 1.0F) * 0.22F + Mth.cos(walk - 0.8F) * 0.3F * amp;
+        this.tail1.xRot += aggressive ? -0.2F : 0.0F;
     }
 }

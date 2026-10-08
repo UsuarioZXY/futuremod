@@ -20,16 +20,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 
-/** Alienigena primitivo: craneo en cupula con antenas, colmillos, espinas de hueso, taparrabos y garrote. */
+/** Modelo compartido de los Verdianos (guerrero, arquero, escudero, caballero y curandero). */
 public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> implements ArmedModel {
     public static final ModelLayerLocation LAYER_LOCATION =
             new ModelLayerLocation(new ResourceLocation(FutureMod.MODID, "alien"), "main");
 
     private final ModelPart root;
     private final ModelPart head;
+    private final ModelPart body;
     private final ModelPart antennaR;
     private final ModelPart antennaL;
     private final ModelPart crest;
+    private final ModelPart helmet;
+    private final ModelPart brow;
     private final ModelPart rightArm;
     private final ModelPart club;
     private final ModelPart spear;
@@ -41,14 +44,17 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
     public AlienModel(ModelPart root) {
         this.root = root;
         this.head = root.getChild("head");
+        this.body = root.getChild("body");
         this.antennaR = this.head.getChild("antenna_r");
         this.antennaL = this.head.getChild("antenna_l");
         this.crest = this.head.getChild("crest");
+        this.helmet = this.head.getChild("helmet");
+        this.brow = this.head.getChild("brow");
         this.rightArm = root.getChild("right_arm");
-        this.leftArm = root.getChild("left_arm");
         this.club = this.rightArm.getChild("club");
         this.spear = this.rightArm.getChild("spear");
         this.scepter = this.rightArm.getChild("scepter");
+        this.leftArm = root.getChild("left_arm");
         this.rightLeg = root.getChild("right_leg");
         this.leftLeg = root.getChild("left_leg");
     }
@@ -57,16 +63,19 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
 
-        // Cabeza: craneo + cupula + mandibula + colmillos + ceja marcada
+        // Cabeza: craneo + cupula + mandibula + colmillos
         PartDefinition head = root.addOrReplaceChild("head",
                 CubeListBuilder.create()
                         .texOffs(0, 0).addBox(-4.5F, -11.0F, -4.5F, 9.0F, 7.0F, 9.0F)
                         .texOffs(0, 52).addBox(-3.5F, -14.0F, -3.5F, 7.0F, 3.0F, 7.0F)
                         .texOffs(36, 0).addBox(-2.5F, -4.0F, -3.5F, 5.0F, 4.0F, 6.0F)
                         .texOffs(12, 46).addBox(-2.5F, -3.0F, -4.0F, 1.0F, 3.0F, 1.0F)
-                        .texOffs(12, 46).addBox(1.5F, -3.0F, -4.0F, 1.0F, 3.0F, 1.0F)
-                        .texOffs(34, 46).addBox(-4.5F, -10.0F, -5.5F, 9.0F, 1.0F, 1.0F),
+                        .texOffs(12, 46).addBox(1.5F, -3.0F, -4.0F, 1.0F, 3.0F, 1.0F),
                 PartPose.offsetAndRotation(0.0F, 4.4F, -1.5F, 0.3F, 0.0F, 0.0F));
+        // Ceja marcada (se oculta bajo el casco del caballero)
+        head.addOrReplaceChild("brow",
+                CubeListBuilder.create().texOffs(34, 46).addBox(-4.5F, -10.0F, -5.5F, 9.0F, 1.0F, 1.0F),
+                PartPose.ZERO);
         // Antenas con bulbo brillante
         head.addOrReplaceChild("antenna_r",
                 CubeListBuilder.create()
@@ -78,10 +87,17 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
                         .texOffs(0, 46).addBox(-0.5F, -5.0F, -0.5F, 1.0F, 5.0F, 1.0F)
                         .texOffs(4, 46).addBox(-1.0F, -7.0F, -1.0F, 2.0F, 2.0F, 2.0F),
                 PartPose.offsetAndRotation(2.5F, -13.0F, -1.0F, -0.15F, 0.0F, 0.35F));
-
-        // Cresta del Verdiano caballero (solo la usa el)
+        // Cresta del caballero, sobre el casco
         head.addOrReplaceChild("crest",
-                CubeListBuilder.create().texOffs(40, 52).addBox(-1.0F, -16.0F, -4.0F, 2.0F, 3.0F, 8.0F),
+                CubeListBuilder.create().texOffs(40, 52).addBox(-1.0F, -18.0F, -4.0F, 2.0F, 3.0F, 8.0F),
+                PartPose.ZERO);
+        // Casco del caballero: calota, carrilleras y barra nasal (los ojos se ven por la rendija)
+        head.addOrReplaceChild("helmet",
+                CubeListBuilder.create()
+                        .texOffs(0, 64).addBox(-5.0F, -15.0F, -5.0F, 10.0F, 9.0F, 10.0F)
+                        .texOffs(40, 64).addBox(-5.5F, -6.0F, -3.5F, 1.0F, 4.0F, 6.0F)
+                        .texOffs(40, 64).addBox(4.5F, -6.0F, -3.5F, 1.0F, 4.0F, 6.0F)
+                        .texOffs(54, 64).addBox(-0.5F, -9.0F, -5.6F, 1.0F, 5.0F, 1.0F),
                 PartPose.ZERO);
 
         // Torso encorvado (pivote en la cadera)
@@ -91,7 +107,6 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
         body.addOrReplaceChild("loincloth",
                 CubeListBuilder.create().texOffs(22, 16).addBox(-3.5F, 0.0F, -2.5F, 7.0F, 5.0F, 5.0F),
                 PartPose.offset(0.0F, -0.5F, 0.0F));
-        // Espinas de hueso en la espalda
         body.addOrReplaceChild("spine_1",
                 CubeListBuilder.create().texOffs(24, 46).addBox(-1.0F, 0.0F, 0.0F, 2.0F, 2.0F, 3.0F),
                 PartPose.offsetAndRotation(0.0F, -8.0F, 2.0F, 0.5F, 0.0F, 0.0F));
@@ -102,7 +117,7 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
                 CubeListBuilder.create().texOffs(24, 46).addBox(-1.0F, 0.0F, 0.0F, 2.0F, 2.0F, 3.0F),
                 PartPose.offsetAndRotation(0.0F, -2.0F, 2.0F, 0.5F, 0.0F, 0.0F));
 
-        // Brazos largos con hombreras de hueso; el derecho lleva un garrote
+        // Brazos largos. Las armas de mano van adelantadas (z = -2.5) para no atravesar el brazo.
         PartDefinition rightArm = root.addOrReplaceChild("right_arm",
                 CubeListBuilder.create().texOffs(0, 30).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 13.0F, 2.0F),
                 PartPose.offset(-4.5F, 5.5F, -1.0F));
@@ -111,18 +126,16 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
                         .texOffs(40, 30).addBox(-0.5F, -9.0F, -0.5F, 1.0F, 10.0F, 1.0F)
                         .texOffs(44, 30).addBox(-1.5F, -13.0F, -1.5F, 3.0F, 5.0F, 3.0F),
                 PartPose.offsetAndRotation(0.0F, 11.0F, 0.0F, 1.2F, 0.0F, 0.0F));
-        // Lanza (solo la usa el Verdiano escudero): astil largo con punta de piedra
         rightArm.addOrReplaceChild("spear",
                 CubeListBuilder.create()
                         .texOffs(58, 0).addBox(-0.5F, -16.0F, -0.5F, 1.0F, 24.0F, 1.0F)
                         .texOffs(30, 52).addBox(-1.0F, -19.0F, -1.0F, 2.0F, 3.0F, 2.0F),
-                PartPose.offset(0.0F, 11.0F, 0.0F));
-        // Cetro del curandero: baston con orbe brillante en la punta
+                PartPose.offset(0.0F, 11.0F, -2.5F));
         rightArm.addOrReplaceChild("scepter",
                 CubeListBuilder.create()
                         .texOffs(56, 26).addBox(-0.5F, -18.0F, -0.5F, 1.0F, 24.0F, 1.0F)
                         .texOffs(44, 38).addBox(-1.5F, -21.0F, -1.5F, 3.0F, 3.0F, 3.0F),
-                PartPose.offset(0.0F, 11.0F, 0.0F));
+                PartPose.offset(0.0F, 11.0F, -2.5F));
         rightArm.addOrReplaceChild("pauldron_r",
                 CubeListBuilder.create().texOffs(16, 46).addBox(-1.0F, -3.0F, -1.0F, 2.0F, 3.0F, 2.0F),
                 PartPose.offsetAndRotation(-0.5F, -0.5F, 0.0F, 0.0F, 0.0F, -0.5F));
@@ -141,7 +154,7 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
                 CubeListBuilder.create().texOffs(28, 30).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 10.0F, 3.0F),
                 PartPose.offset(1.8F, 14.0F, 0.0F));
 
-        return LayerDefinition.create(mesh, 64, 64);
+        return LayerDefinition.create(mesh, 64, 128);
     }
 
     @Override
@@ -149,78 +162,120 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
         return this.root;
     }
 
+    /** Curva de un golpe: pose lista, preparacion (arriba/atras), golpe y vuelta. attack va de 0 a 1. */
+    private static float strikeCurve(float attack, float ready, float windup, float strike) {
+        if (attack < 0.35F) {
+            return Mth.lerp(attack / 0.35F, ready, windup);
+        }
+        if (attack < 0.7F) {
+            return Mth.lerp((attack - 0.35F) / 0.35F, windup, strike);
+        }
+        return Mth.lerp((attack - 0.7F) / 0.3F, strike, ready);
+    }
+
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks,
                           float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
-        this.head.yRot = netHeadYaw * ((float) Math.PI / 180F);
-        this.head.xRot += headPitch * ((float) Math.PI / 180F);
-
-        // Las antenas se mecen solas
-        this.antennaR.zRot += Mth.sin(ageInTicks * 0.1F) * 0.08F;
-        this.antennaL.zRot -= Mth.sin(ageInTicks * 0.1F + 1.5F) * 0.08F;
-
-        float swing = Mth.cos(limbSwing * 0.6662F) * limbSwingAmount;
-        this.rightLeg.xRot = swing * 1.4F;
-        this.leftLeg.xRot = -swing * 1.4F;
-
-        if (entity.isAggressive()) {
-            // Brazos en alto; el derecho golpea con el garrote
-            float hit = Mth.sin(this.attackTime * (float) Math.PI);
-            this.rightArm.xRot = -1.6F + hit * 1.5F;
-            this.leftArm.xRot = -1.4F + Mth.sin(ageInTicks * 0.3F) * 0.05F;
-            this.rightArm.zRot = 0.1F;
-            this.leftArm.zRot = -0.1F;
-        } else {
-            this.rightArm.xRot = -swing * 1.0F;
-            this.leftArm.xRot = swing * 1.0F;
-            this.rightArm.zRot = 0.1F + Mth.cos(ageInTicks * 0.09F) * 0.04F;
-            this.leftArm.zRot = -0.1F - Mth.cos(ageInTicks * 0.09F) * 0.04F;
-        }
-
-        // El arquero no lleva garrote: sostiene un arco y apunta con ambos brazos
+        float pi = (float) Math.PI;
         boolean archer = entity instanceof AlienArcherEntity;
         boolean shielded = entity instanceof AlienShieldbearerEntity;
         boolean knight = entity instanceof AlienKnightEntity;
         boolean healer = entity instanceof AlienHealerEntity;
-        this.club.visible = !archer && !shielded && !knight && !healer;
-        this.scepter.visible = healer;
+        boolean warrior = !archer && !shielded && !knight && !healer;
+        boolean aggressive = entity.isAggressive();
+        float attack = this.attackTime;
+
+        this.club.visible = warrior;
         this.spear.visible = shielded;
+        this.scepter.visible = healer;
         this.crest.visible = knight;
-        if (archer && entity.isAggressive()) {
+        this.helmet.visible = knight;
+        this.brow.visible = !knight;
+        this.antennaR.visible = !knight;
+        this.antennaL.visible = !knight;
+
+        float walk = limbSwing * 0.6662F;
+        float amp = Math.min(1.0F, limbSwingAmount);
+        float swing = Mth.cos(walk) * amp;
+        float bob = -Mth.abs(Mth.cos(walk)) * 0.8F * amp;
+        float breathe = Mth.sin(ageInTicks * 0.08F);
+        float lean = Mth.sin(attack * pi);
+
+        // Cabeza: sigue la mirada, cabecea al caminar y se adelanta al atacar
+        this.head.yRot = netHeadYaw * (pi / 180F);
+        this.head.xRot += headPitch * (pi / 180F) + Mth.cos(walk * 2.0F) * 0.05F * amp - breathe * 0.02F + lean * 0.2F;
+        this.head.y += bob;
+
+        // Torso: respira, se balancea al caminar y se inclina al atacar
+        this.body.y += bob * 0.6F;
+        this.body.xRot += breathe * 0.02F + lean * 0.3F;
+        this.body.zRot = Mth.cos(walk) * 0.05F * amp;
+        this.body.yRot = Mth.cos(walk) * 0.1F * amp;
+
+        // Piernas
+        this.rightLeg.xRot = swing * 1.4F;
+        this.leftLeg.xRot = -swing * 1.4F;
+
+        // Antenas: se mecen y van un poco por detras del cuerpo
+        this.antennaR.zRot += Mth.sin(ageInTicks * 0.1F) * 0.08F + swing * 0.1F;
+        this.antennaL.zRot -= Mth.sin(ageInTicks * 0.1F + 1.5F) * 0.08F + swing * 0.1F;
+        this.antennaR.xRot += Mth.cos(walk * 2.0F) * 0.06F * amp;
+        this.antennaL.xRot += Mth.cos(walk * 2.0F) * 0.06F * amp;
+
+        // Brazos relajados
+        this.rightArm.y += bob * 0.7F;
+        this.leftArm.y += bob * 0.7F;
+        this.rightArm.xRot = -swing;
+        this.leftArm.xRot = swing;
+        this.rightArm.zRot = 0.1F + Mth.cos(ageInTicks * 0.09F) * 0.04F;
+        this.leftArm.zRot = -0.1F - Mth.cos(ageInTicks * 0.09F) * 0.04F;
+
+        // Guerrero: garrote en alto, golpe hacia abajo
+        if (warrior && aggressive) {
+            this.rightArm.xRot = strikeCurve(attack, -1.6F, -2.7F, -0.3F);
+            this.leftArm.xRot = -1.4F + Mth.sin(ageInTicks * 0.3F) * 0.05F;
+            this.rightArm.zRot = 0.1F;
+            this.leftArm.zRot = -0.1F;
+        }
+
+        // Arquero: apunta con los dos brazos
+        if (archer && aggressive) {
             this.rightArm.yRot = -0.1F + this.head.yRot;
             this.leftArm.yRot = 0.1F + this.head.yRot + 0.4F;
-            this.rightArm.xRot = (-(float) Math.PI / 2F) + this.head.xRot;
-            this.leftArm.xRot = (-(float) Math.PI / 2F) + this.head.xRot;
+            this.rightArm.xRot = (-pi / 2F) + this.head.xRot + Mth.sin(ageInTicks * 0.1F) * 0.02F;
+            this.leftArm.xRot = (-pi / 2F) + this.head.xRot + Mth.sin(ageInTicks * 0.1F + 1.0F) * 0.02F;
             this.rightArm.zRot = 0.0F;
             this.leftArm.zRot = 0.0F;
         }
 
-        // El escudero embiste con la lanza hacia delante y lleva el escudo al frente
-        if (shielded && entity.isAggressive()) {
-            float thrust = Mth.sin(this.attackTime * (float) Math.PI);
-            this.rightArm.xRot = -0.9F - thrust * 0.4F;
+        // Escudero: estocada con la lanza (la punta siempre apunta al frente) y escudo adelantado
+        if (shielded && aggressive) {
+            this.rightArm.xRot = strikeCurve(attack, -0.9F, -0.3F, -1.35F);
             this.rightArm.zRot = 0.0F;
-            this.spear.xRot = ((float) Math.PI / 2F) - this.rightArm.xRot + 0.1F;
-            this.spear.y += thrust * 4.0F;
+            this.spear.xRot = (pi / 2F) - this.rightArm.xRot + 0.1F;
+            this.spear.y += Mth.sin(attack * pi) * 4.0F;
             this.leftArm.xRot = -0.35F;
             this.leftArm.zRot = -0.05F;
         }
 
-        // El caballero blande la espada y lleva el escudo al frente
-        if (knight && entity.isAggressive()) {
-            float slash = Mth.sin(this.attackTime * (float) Math.PI);
-            this.rightArm.xRot = -1.1F + slash * 1.3F;
+        // Caballero: tajo con la espada y escudo al frente
+        if (knight && aggressive) {
+            this.rightArm.xRot = strikeCurve(attack, -1.1F, -2.3F, -0.2F);
             this.rightArm.zRot = 0.0F;
-            this.leftArm.xRot = -0.35F;
-            this.leftArm.zRot = -0.05F;
+            this.leftArm.xRot = -0.5F + Mth.sin(ageInTicks * 0.1F) * 0.02F;
+            this.leftArm.zRot = -0.15F;
         }
 
-        // El curandero sostiene el cetro con el brazo un poco adelantado
+        // Curandero: sostiene el cetro y lo alza cuando cura
         if (healer) {
-            this.rightArm.xRot = -0.35F + Mth.sin(ageInTicks * 0.05F) * 0.05F;
+            float heal = ((AlienHealerEntity) entity).getHealAnim();
+            this.rightArm.xRot = Mth.lerp(heal, -0.35F + Mth.sin(ageInTicks * 0.05F) * 0.05F,
+                    -2.3F + Mth.sin(ageInTicks * 0.9F) * 0.08F);
             this.rightArm.zRot = 0.05F;
+            this.leftArm.xRot = Mth.lerp(heal, this.leftArm.xRot, -1.1F);
+            this.scepter.zRot += Mth.sin(ageInTicks * 0.3F) * 0.05F * heal;
         }
 
         // Montado: piernas hacia delante, abiertas
