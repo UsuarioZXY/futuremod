@@ -60,19 +60,19 @@ public class ModItems {
     // Armadura verdiana (hueso alienigena + tela primitiva)
     public static final RegistryObject<Item> VERDIAN_HELMET =
             ITEMS.register("verdian_helmet",
-                    () -> new ArmorItem(ModArmorMaterials.VERDIAN, ArmorItem.Type.HELMET, new Item.Properties()));
+                    () -> new VerdianArmorItem(ModArmorMaterials.VERDIAN, ArmorItem.Type.HELMET, new Item.Properties()));
 
     public static final RegistryObject<Item> VERDIAN_CHESTPLATE =
             ITEMS.register("verdian_chestplate",
-                    () -> new ArmorItem(ModArmorMaterials.VERDIAN, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+                    () -> new VerdianArmorItem(ModArmorMaterials.VERDIAN, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
 
     public static final RegistryObject<Item> VERDIAN_LEGGINGS =
             ITEMS.register("verdian_leggings",
-                    () -> new ArmorItem(ModArmorMaterials.VERDIAN, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+                    () -> new VerdianArmorItem(ModArmorMaterials.VERDIAN, ArmorItem.Type.LEGGINGS, new Item.Properties()));
 
     public static final RegistryObject<Item> VERDIAN_BOOTS =
             ITEMS.register("verdian_boots",
-                    () -> new ArmorItem(ModArmorMaterials.VERDIAN, ArmorItem.Type.BOOTS, new Item.Properties()));
+                    () -> new VerdianArmorItem(ModArmorMaterials.VERDIAN, ArmorItem.Type.BOOTS, new Item.Properties(), 0.15D));
 
     // Botin del alienigena
     public static final RegistryObject<Item> ALIEN_BONE =
@@ -124,7 +124,7 @@ public class ModItems {
                     () -> new ForgeSpawnEggItem(ModEntities.RODIA, 0x4E6B55, 0xE0B050, new Item.Properties()));
 
     public static final RegistryObject<Item> PRIMITIVE_SWORD =
-            ITEMS.register("primitive_sword", () -> new SwordItem(ModTiers.PRIMITIVE, 3, -2.4F, new Item.Properties()));
+            ITEMS.register("primitive_sword", () -> new PrimitiveSwordItem(ModTiers.PRIMITIVE, 4, -2.4F, new Item.Properties()));
 
     public static final RegistryObject<Item> ALIEN_HEALER_SPAWN_EGG =
             ITEMS.register("alien_healer_spawn_egg",

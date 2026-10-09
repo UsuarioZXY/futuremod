@@ -3,8 +3,8 @@
   "biomes": "#minecraft:is_overworld",
   "spawners": {
     "type": "futuremod:alien_shieldbearer",
-    "weight": 15,
+    "weight": 7,
     "minCount": 1,
-    "maxCount": 3
+    "maxCount": 2
   }
 }
