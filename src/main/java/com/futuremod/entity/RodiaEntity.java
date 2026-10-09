@@ -348,7 +348,22 @@ public class RodiaEntity extends Monster {
         if (target.getUUID().equals(getOwnerUUID()) || (target instanceof RodiaEntity r && r.isTame() && this.isTame())) {
             return false;
         }
+        if (this.isTame()) {
+            // un Rodia amigo defiende a su dueno de quien sea, incluso de los Verdianos
+            return super.canAttack(target);
+        }
         return !AlienEntity.isKin(target) && super.canAttack(target);
+    }
+
+    /** El dueno fue atacado o ataco: el Rodia amigo va directo contra ese objetivo. */
+    public void defendOwnerAgainst(LivingEntity target) {
+        if (!this.isTame() || this.isSitting() || target == null || !target.isAlive() || target == this
+                || target instanceof Player || target instanceof ArmorStand
+                || target.getUUID().equals(getOwnerUUID())
+                || (target instanceof RodiaEntity r && r.isTame())) {
+            return;
+        }
+        this.setTarget(target);
     }
 
     /** Cada mordida envenena a la victima (cria: veneno mas corto). */
