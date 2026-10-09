@@ -127,6 +127,21 @@ public class RodiaModel extends HierarchicalModel<RodiaEntity> {
         float bite = Mth.sin(this.attackTime * pi);
         boolean aggressive = entity.isAggressive();
 
+        // Cria: cabeza grande, cuello y cola cortos, patas cortas (siempre se fija la escala)
+        boolean baby = entity.isBaby();
+        float hs = baby ? 2.0F : 1.0F;
+        float ns = baby ? 0.8F : 1.0F;
+        float ts = baby ? 0.7F : 1.0F;
+        float ls = baby ? 0.8F : 1.0F;
+        this.neck.xScale = ns; this.neck.yScale = ns; this.neck.zScale = ns;
+        this.head.xScale = hs; this.head.yScale = hs; this.head.zScale = hs;
+        this.tail1.xScale = ts; this.tail1.yScale = ts; this.tail1.zScale = ts;
+        this.legFR.yScale = ls; this.legFL.yScale = ls; this.legBR.yScale = ls; this.legBL.yScale = ls;
+        if (baby) {
+            this.body.y += 1.8F;
+            this.legFR.y += 1.8F; this.legFL.y += 1.8F; this.legBR.y += 1.8F; this.legBL.y += 1.8F;
+        }
+
         // Patas (trote en diagonal) y rebote del cuerpo
         this.legFR.xRot = swing;
         this.legBL.xRot = swing;

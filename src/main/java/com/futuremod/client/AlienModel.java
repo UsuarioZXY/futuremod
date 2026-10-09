@@ -130,12 +130,12 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
                 CubeListBuilder.create()
                         .texOffs(58, 0).addBox(-0.5F, -16.0F, -0.5F, 1.0F, 24.0F, 1.0F)
                         .texOffs(30, 52).addBox(-1.0F, -19.0F, -1.0F, 2.0F, 3.0F, 2.0F),
-                PartPose.offset(0.0F, 11.0F, -2.5F));
+                PartPose.offset(-0.5F, 11.0F, -2.5F));
         rightArm.addOrReplaceChild("scepter",
                 CubeListBuilder.create()
-                        .texOffs(56, 26).addBox(-0.5F, -18.0F, -0.5F, 1.0F, 24.0F, 1.0F)
+                        .texOffs(56, 26).addBox(-0.5F, -18.0F, -0.5F, 1.0F, 22.0F, 1.0F)
                         .texOffs(44, 38).addBox(-1.5F, -21.0F, -1.5F, 3.0F, 3.0F, 3.0F),
-                PartPose.offset(0.0F, 11.0F, -2.5F));
+                PartPose.offset(-0.5F, 11.0F, -2.5F));
         rightArm.addOrReplaceChild("pauldron_r",
                 CubeListBuilder.create().texOffs(16, 46).addBox(-1.0F, -3.0F, -1.0F, 2.0F, 3.0F, 2.0F),
                 PartPose.offsetAndRotation(-0.5F, -0.5F, 0.0F, 0.0F, 0.0F, -0.5F));
@@ -271,12 +271,16 @@ public class AlienModel<T extends AlienEntity> extends HierarchicalModel<T> impl
         // Curandero: sostiene el cetro y lo alza cuando cura
         if (healer) {
             float heal = ((AlienHealerEntity) entity).getHealAnim();
-            this.rightArm.xRot = Mth.lerp(heal, -0.35F + Mth.sin(ageInTicks * 0.05F) * 0.05F,
+            this.rightArm.xRot = Mth.lerp(heal, -0.15F + Mth.sin(ageInTicks * 0.05F) * 0.05F,
                     -2.3F + Mth.sin(ageInTicks * 0.9F) * 0.08F);
             this.rightArm.zRot = 0.05F;
             this.leftArm.xRot = Mth.lerp(heal, this.leftArm.xRot, -1.1F);
             this.scepter.zRot += Mth.sin(ageInTicks * 0.3F) * 0.05F * heal;
         }
+
+        // Compensa la inclinacion del brazo para que lanza y cetro no crucen el cuerpo
+        this.spear.zRot = -this.rightArm.zRot - 0.06F;
+        this.scepter.zRot += -this.rightArm.zRot - 0.08F;
 
         // Montado: piernas hacia delante, abiertas
         if (this.riding) {
