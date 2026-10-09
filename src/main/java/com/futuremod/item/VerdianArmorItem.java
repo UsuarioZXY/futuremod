@@ -11,9 +11,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 
-/** Armadura verdiana: cada pieza da +5% de ataque (con cualquier cosa) y las botas +15% de velocidad. */
+/** Armadura verdiana: cada pieza da +5% de ataque (con cualquier cosa), medio corazon extra y las botas +15% de velocidad. */
 public class VerdianArmorItem extends ArmorItem {
     private static final EnumMap<ArmorItem.Type, UUID> ATTACK_UUIDS = new EnumMap<>(ArmorItem.Type.class);
+    private static final EnumMap<ArmorItem.Type, UUID> HEALTH_UUIDS = new EnumMap<>(ArmorItem.Type.class);
     private static final UUID SPEED_UUID = UUID.fromString("5e2b7c10-4a39-4d6e-8f21-9b3c0d1a7e05");
 
     static {
@@ -21,6 +22,13 @@ public class VerdianArmorItem extends ArmorItem {
         ATTACK_UUIDS.put(ArmorItem.Type.LEGGINGS, UUID.fromString("5e2b7c10-4a39-4d6e-8f21-9b3c0d1a7e02"));
         ATTACK_UUIDS.put(ArmorItem.Type.CHESTPLATE, UUID.fromString("5e2b7c10-4a39-4d6e-8f21-9b3c0d1a7e03"));
         ATTACK_UUIDS.put(ArmorItem.Type.HELMET, UUID.fromString("5e2b7c10-4a39-4d6e-8f21-9b3c0d1a7e04"));
+    }
+
+    static {
+        HEALTH_UUIDS.put(ArmorItem.Type.BOOTS, UUID.fromString("5e2b7c10-4a39-4d6e-8f21-9b3c0d1a7e11"));
+        HEALTH_UUIDS.put(ArmorItem.Type.LEGGINGS, UUID.fromString("5e2b7c10-4a39-4d6e-8f21-9b3c0d1a7e12"));
+        HEALTH_UUIDS.put(ArmorItem.Type.CHESTPLATE, UUID.fromString("5e2b7c10-4a39-4d6e-8f21-9b3c0d1a7e13"));
+        HEALTH_UUIDS.put(ArmorItem.Type.HELMET, UUID.fromString("5e2b7c10-4a39-4d6e-8f21-9b3c0d1a7e14"));
     }
 
     private final double speedBonus;
@@ -47,6 +55,10 @@ public class VerdianArmorItem extends ArmorItem {
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(
                 ATTACK_UUIDS.get(this.getType()), "Verdian armor attack", 0.05D,
                 AttributeModifier.Operation.MULTIPLY_TOTAL));
+        // 1.0 de vida = medio corazon por pieza
+        builder.put(Attributes.MAX_HEALTH, new AttributeModifier(
+                HEALTH_UUIDS.get(this.getType()), "Verdian armor health", 1.0D,
+                AttributeModifier.Operation.ADDITION));
         if (this.speedBonus != 0.0D) {
             builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(
                     SPEED_UUID, "Verdian boots speed", this.speedBonus,

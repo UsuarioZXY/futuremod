@@ -308,22 +308,23 @@ public class RodiaEntity extends Monster {
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, true) {
             @Override
             public boolean canUse() {
-                return !RodiaEntity.this.isBaby() && !RodiaEntity.this.isTame() && super.canUse();
+                return (!RodiaEntity.this.isBaby() || RodiaEntity.this.isTame()) && super.canUse();
             }
 
             @Override
             public boolean canContinueToUse() {
-                return !RodiaEntity.this.isBaby() && !RodiaEntity.this.isTame() && super.canContinueToUse();
+                return (!RodiaEntity.this.isBaby() || RodiaEntity.this.isTame()) && super.canContinueToUse();
             }
         });
         this.goalSelector.addGoal(3, new FollowOwnerGoal());
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.9D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 10.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(0, new DefendOwnerGoal());
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this) {
             @Override
             public boolean canUse() {
-                return !RodiaEntity.this.isBaby() && !RodiaEntity.this.isTame() && super.canUse();
+                return (!RodiaEntity.this.isBaby() || RodiaEntity.this.isTame()) && super.canUse();
             }
         }.setAlertOthers());
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true) {
@@ -348,12 +349,6 @@ public class RodiaEntity extends Monster {
             return false;
         }
         return !AlienEntity.isKin(target) && super.canAttack(target);
-    }
-
-    /** Un Rodia amigo nunca elige objetivo: solo te sigue y se queda quieto. */
-    @Override
-    public void setTarget(@Nullable LivingEntity target) {
-        super.setTarget(this.isTame() ? null : target);
     }
 
     /** Cada mordida envenena a la victima (cria: veneno mas corto). */
@@ -438,6 +433,49 @@ public class RodiaEntity extends Monster {
         @Override
         public void stop() {
             getNavigation().stop();
+        }
+    }
+
+    /** El Rodia amigo defiende a su dueno: ataca a quien lo dane y a lo que el dueno golpee. */
+    private class DefendOwnerGoal extends TargetGoal {
+        private LivingEntity victim;
+
+        DefendOwnerGoal() {
+            super(RodiaEntity.this, false);
+            this.setFlags(EnumSet.of(Flag.TARGET));
+        }
+
+        @Override
+        public boolean canUse() {
+            if (!isTame() || isSitting()) return false;
+            LivingEntity o = getOwner();
+            if (o == null || !o.isAlive()) return false;
+            // primero: quien dane al dueno
+            LivingEntity t = o.getLastHurtByMob();
+            if (!valid(t) || o.tickCount - o.getLastHurtByMobTimestamp() > 200) {
+                // luego: lo que el dueno ataque
+                t = o.getLastHurtMob();
+                if (!valid(t) || o.tickCount - o.getLastHurtMobTimestamp() > 200) return false;
+            }
+            this.victim = t;
+            return true;
+        }
+
+        private boolean valid(LivingEntity t) {
+            return t != null && t.isAlive() && t != RodiaEntity.this && !(t instanceof Player)
+                    && !(t instanceof ArmorStand) && RodiaEntity.this.canAttack(t);
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            LivingEntity t = RodiaEntity.this.getTarget();
+            return t != null && t.isAlive() && isTame() && !isSitting();
+        }
+
+        @Override
+        public void start() {
+            this.targetMob = victim;
+            super.start();
         }
     }
 }
