@@ -12,7 +12,10 @@ public enum ModArmorMaterials implements ArmorMaterial {
     // nombre, multiplicador de durabilidad (hierro 15, diamante 33), defensa casco/peto/pantalon/botas,
     // encantabilidad, sonido, dureza, resistencia al empuje, material de reparacion
     STEEL("steel", 140, 3, 7, 5, 3, 12, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F,
-            () -> Ingredient.of(ModItems.STEEL_INGOT.get()));
+            () -> Ingredient.of(ModItems.STEEL_INGOT.get())),
+    // Armadura verdiana: hueso alienigena y tela primitiva (algo menos que el hierro, pero dura mas)
+    VERDIAN("verdian", 22, 2, 5, 4, 2, 9, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0F, 0.0F,
+            () -> Ingredient.of(ModItems.ALIEN_BONE.get()));
 
     private final String name;
     private final int durabilityMultiplier;

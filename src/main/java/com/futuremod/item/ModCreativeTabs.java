@@ -33,6 +33,10 @@ public class ModCreativeTabs {
                         output.accept(ModItems.STEEL_CHESTPLATE.get());
                         output.accept(ModItems.STEEL_LEGGINGS.get());
                         output.accept(ModItems.STEEL_BOOTS.get());
+                        output.accept(ModItems.VERDIAN_HELMET.get());
+                        output.accept(ModItems.VERDIAN_CHESTPLATE.get());
+                        output.accept(ModItems.VERDIAN_LEGGINGS.get());
+                        output.accept(ModItems.VERDIAN_BOOTS.get());
                         output.accept(ModItems.STEEL_SWORD.get());
                         output.accept(ModItems.STEEL_PICKAXE.get());
                         output.accept(ModItems.STEEL_AXE.get());

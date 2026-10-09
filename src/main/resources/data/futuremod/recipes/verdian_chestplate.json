@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "R R",
+    "TCT",
+    "CAC"
+  ],
+  "key": {
+    "A": {
+      "item": "futuremod:alien_bone"
+    },
+    "C": {
+      "item": "futuremod:primitive_cloth"
+    },
+    "R": {
+      "item": "futuremod:broken_bone"
+    },
+    "T": {
+      "item": "futuremod:primitive_thread"
+    }
+  },
+  "result": {
+    "item": "futuremod:verdian_chestplate"
+  }
+}

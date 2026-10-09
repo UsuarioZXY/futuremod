@@ -41,5 +41,9 @@
   "item.futuremod.rodia_spawn_egg": "Generar Rodia",
   "item.futuremod.primitive_sword": "Espada primitiva",
   "entity.futuremod.alien_healer": "Verdiano curandero",
-  "item.futuremod.alien_healer_spawn_egg": "Generar Verdiano curandero"
+  "item.futuremod.alien_healer_spawn_egg": "Generar Verdiano curandero",
+  "item.futuremod.verdian_helmet": "Casco verdiano",
+  "item.futuremod.verdian_chestplate": "Peto verdiano",
+  "item.futuremod.verdian_leggings": "Pantalones verdianos",
+  "item.futuremod.verdian_boots": "Botas verdianas"
 }

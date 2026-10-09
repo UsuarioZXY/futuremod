@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "TCT",
+    "R R"
+  ],
+  "key": {
+    "C": {
+      "item": "futuremod:primitive_cloth"
+    },
+    "R": {
+      "item": "futuremod:broken_bone"
+    },
+    "T": {
+      "item": "futuremod:primitive_thread"
+    }
+  },
+  "result": {
+    "item": "futuremod:verdian_helmet"
+  }
+}

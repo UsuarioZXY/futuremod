@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "R R",
+    "A A"
+  ],
+  "key": {
+    "A": {
+      "item": "futuremod:alien_bone"
+    },
+    "R": {
+      "item": "futuremod:broken_bone"
+    }
+  },
+  "result": {
+    "item": "futuremod:verdian_boots"
+  }
+}

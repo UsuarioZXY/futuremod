@@ -54,6 +54,23 @@ public class ModItems {
             ITEMS.register("steel_boots",
                     () -> new SteelArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.BOOTS, new Item.Properties(), 2.0D, 0.10D));
 
+    // Armadura verdiana (hueso alienigena + tela primitiva)
+    public static final RegistryObject<Item> VERDIAN_HELMET =
+            ITEMS.register("verdian_helmet",
+                    () -> new ArmorItem(ModArmorMaterials.VERDIAN, ArmorItem.Type.HELMET, new Item.Properties()));
+
+    public static final RegistryObject<Item> VERDIAN_CHESTPLATE =
+            ITEMS.register("verdian_chestplate",
+                    () -> new ArmorItem(ModArmorMaterials.VERDIAN, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+
+    public static final RegistryObject<Item> VERDIAN_LEGGINGS =
+            ITEMS.register("verdian_leggings",
+                    () -> new ArmorItem(ModArmorMaterials.VERDIAN, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+
+    public static final RegistryObject<Item> VERDIAN_BOOTS =
+            ITEMS.register("verdian_boots",
+                    () -> new ArmorItem(ModArmorMaterials.VERDIAN, ArmorItem.Type.BOOTS, new Item.Properties()));
+
     // Botin del alienigena
     public static final RegistryObject<Item> ALIEN_BONE =
             ITEMS.register("alien_bone", () -> new Item(new Item.Properties()));
