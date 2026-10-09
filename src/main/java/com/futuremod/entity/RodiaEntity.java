@@ -379,7 +379,7 @@ public class RodiaEntity extends Monster {
                 t = o.getLastHurtMob();
                 if (t == null || o.getLastHurtMobTimestamp() + 100 < o.tickCount) return false;
             }
-            if (t == RodiaEntity.this || !canAttack(t) || t instanceof Player) return false;
+            if (t == RodiaEntity.this || !RodiaEntity.this.canAttack(t) || t instanceof Player) return false;
             this.victim = t;
             return true;
         }
