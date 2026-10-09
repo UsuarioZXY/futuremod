@@ -54,9 +54,13 @@ public class RodiaEntity extends Monster {
             SynchedEntityData.defineId(RodiaEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Optional<UUID>> DATA_OWNER =
             SynchedEntityData.defineId(RodiaEntity.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<Boolean> DATA_SIT =
+            SynchedEntityData.defineId(RodiaEntity.class, EntityDataSerializers.BOOLEAN);
     private static final UUID TAME_SPEED_ID = UUID.fromString("3b6f5a60-8c2d-4e4b-9a31-7d0c1f2e4a14");
     /** Ticks que tarda una cria domesticada en crecer (20 minutos). */
     private static final int GROW_TICKS = 24000;
+    /** Tiempo de crecimiento que adelanta cada carne dada a una cria amiga (4 minutos). */
+    private static final int GROW_BOOST_TICKS = 4800;
     private int growTimer = 0;
 
     private static final UUID BABY_HEALTH_ID = UUID.fromString("3b6f5a60-8c2d-4e4b-9a31-7d0c1f2e4a11");
@@ -73,6 +77,7 @@ public class RodiaEntity extends Monster {
         super.defineSynchedData();
         this.entityData.define(DATA_BABY, false);
         this.entityData.define(DATA_OWNER, Optional.empty());
+        this.entityData.define(DATA_SIT, false);
     }
 
     @Override
@@ -135,30 +140,77 @@ public class RodiaEntity extends Monster {
         }
     }
 
-    /** Cualquier tipo de carne domestica a una cria. */
+    public boolean isSitting() {
+        return this.entityData.get(DATA_SIT);
+    }
+
+    public void setSitting(boolean sit) {
+        this.entityData.set(DATA_SIT, sit);
+    }
+
+    @Override
+    protected boolean isImmobile() {
+        return super.isImmobile() || (this.isTame() && this.isSitting());
+    }
+
+    private void particles(net.minecraft.core.particles.ParticleOptions type, int count) {
+        if (this.level() instanceof ServerLevel sl) {
+            sl.sendParticles(type, getX(), getY() + 0.6D * (isBaby() ? 0.6D : 1.0D) + 0.3D, getZ(), count, 0.3D, 0.3D, 0.3D, 0.05D);
+        }
+    }
+
+    /**
+     * Interaccion: cualquier carne domestica a una cria (1 de 3 por intento); a una cria amiga la hace crecer
+     * mas rapido, a un adulto amigo lo cura; con la mano vacia el dueno lo sienta o lo levanta (como un lobo).
+     */
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         boolean meat = stack.isEdible() && stack.getItem().getFoodProperties() != null
                 && stack.getItem().getFoodProperties().isMeat();
+        boolean client = this.level().isClientSide;
         if (meat && this.isBaby() && !this.isTame()) {
-            if (!this.level().isClientSide) {
+            if (!client) {
                 if (!player.getAbilities().instabuild) stack.shrink(1);
                 if (this.random.nextInt(3) == 0) {
                     this.tameBy(player);
-                    ((ServerLevel) this.level()).sendParticles(ParticleTypes.HEART, getX(), getY() + 0.6D, getZ(), 8, 0.3D, 0.3D, 0.3D, 0.05D);
+                    particles(ParticleTypes.HEART, 8);
                 } else {
-                    ((ServerLevel) this.level()).sendParticles(ParticleTypes.SMOKE, getX(), getY() + 0.6D, getZ(), 6, 0.3D, 0.3D, 0.3D, 0.02D);
+                    particles(ParticleTypes.SMOKE, 6);
                 }
             }
-            return InteractionResult.sidedSuccess(this.level().isClientSide);
+            return InteractionResult.sidedSuccess(client);
         }
-        if (meat && this.isTame() && this.getHealth() < this.getMaxHealth()) {
-            if (!this.level().isClientSide) {
-                if (!player.getAbilities().instabuild) stack.shrink(1);
-                this.heal(6.0F);
+        if (meat && this.isTame()) {
+            if (this.isBaby()) {
+                if (!client) {
+                    if (!player.getAbilities().instabuild) stack.shrink(1);
+                    this.growTimer += GROW_BOOST_TICKS;      // cada carne adelanta 4 minutos de crecimiento
+                    this.heal(4.0F);
+                    particles(ParticleTypes.HAPPY_VILLAGER, 6);
+                }
+                return InteractionResult.sidedSuccess(client);
             }
-            return InteractionResult.sidedSuccess(this.level().isClientSide);
+            if (this.getHealth() < this.getMaxHealth()) {
+                if (!client) {
+                    if (!player.getAbilities().instabuild) stack.shrink(1);
+                    this.heal(6.0F);
+                    particles(ParticleTypes.HEART, 4);
+                }
+                return InteractionResult.sidedSuccess(client);
+            }
+        }
+        if (this.isTame() && player.getUUID().equals(getOwnerUUID()) && !meat && hand == InteractionHand.MAIN_HAND
+                && stack.isEmpty()) {
+            if (!client) {
+                this.setSitting(!this.isSitting());
+                this.getNavigation().stop();
+                this.setTarget(null);
+                particles(this.isSitting() ? ParticleTypes.NOTE : ParticleTypes.HEART, 3);
+                player.displayClientMessage(net.minecraft.network.chat.Component.literal(
+                        this.isSitting() ? "El Rodia se queda quieto." : "El Rodia te sigue."), true);
+            }
+            return InteractionResult.sidedSuccess(client);
         }
         return super.mobInteract(player, hand);
     }
@@ -169,6 +221,7 @@ public class RodiaEntity extends Monster {
         if (!this.level().isClientSide && this.isTame() && this.isBaby() && ++growTimer >= GROW_TICKS) {
             this.setBaby(false);
             growTimer = 0;
+            particles(ParticleTypes.HAPPY_VILLAGER, 12);
         }
     }
 
@@ -202,6 +255,7 @@ public class RodiaEntity extends Monster {
         tag.putBoolean("IsBaby", this.isBaby());
         if (getOwnerUUID() != null) tag.putUUID("Owner", getOwnerUUID());
         tag.putInt("GrowTimer", growTimer);
+        tag.putBoolean("Sitting", isSitting());
     }
 
     @Override
@@ -213,6 +267,7 @@ public class RodiaEntity extends Monster {
             applyTameModifier();
         }
         growTimer = tag.getInt("GrowTimer");
+        this.setSitting(tag.getBoolean("Sitting"));
     }
 
     @Nullable
@@ -261,7 +316,7 @@ public class RodiaEntity extends Monster {
                 return !RodiaEntity.this.isBaby() && super.canContinueToUse();
             }
         });
-        this.goalSelector.addGoal(4, new FollowOwnerGoal());
+        this.goalSelector.addGoal(3, new FollowOwnerGoal());
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.9D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 10.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -322,35 +377,44 @@ public class RodiaEntity extends Monster {
         this.playSound(SoundEvents.RAVAGER_STEP, 0.15F, 1.0F);
     }
 
-    /** El Rodia amigo sigue a su dueno y se teletransporta si se queda muy lejos. */
+    /** El Rodia amigo (cria o adulto) sigue a su dueno como un lobo y se teletransporta si se queda muy lejos. */
     private class FollowOwnerGoal extends Goal {
         private LivingEntity owner;
+        private int recalc;
 
         FollowOwnerGoal() {
-            this.setFlags(EnumSet.of(Flag.MOVE));
+            this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
         }
 
         @Override
         public boolean canUse() {
-            if (!isTame() || getTarget() != null) return false;
+            if (!isTame() || isSitting() || getTarget() != null) return false;
             LivingEntity o = getOwner();
-            if (o == null || o.isSpectator() || distanceToSqr(o) < 100.0D) return false;
+            if (o == null || o.isSpectator() || distanceToSqr(o) < 36.0D) return false;
             this.owner = o;
             return true;
         }
 
         @Override
         public boolean canContinueToUse() {
-            return owner != null && owner.isAlive() && getTarget() == null && distanceToSqr(owner) > 9.0D;
+            return owner != null && owner.isAlive() && !isSitting() && getTarget() == null
+                    && distanceToSqr(owner) > 6.0D;
+        }
+
+        @Override
+        public void start() {
+            this.recalc = 0;
         }
 
         @Override
         public void tick() {
-            if (distanceToSqr(owner) > 1600.0D) {
+            getLookControl().setLookAt(owner, 10.0F, (float) getMaxHeadXRot());
+            if (distanceToSqr(owner) > 400.0D) {
                 getNavigation().stop();
                 moveTo(owner.getX(), owner.getY(), owner.getZ(), getYRot(), getXRot());
-            } else if (tickCount % 10 == 0) {
-                getNavigation().moveTo(owner, 1.0D);
+            } else if (--this.recalc <= 0) {
+                this.recalc = 10;
+                getNavigation().moveTo(owner, 1.3D);
             }
         }
 
