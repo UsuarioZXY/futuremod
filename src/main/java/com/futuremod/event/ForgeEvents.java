@@ -4,11 +4,15 @@ import com.futuremod.FutureMod;
 import com.futuremod.effect.ModEffects;
 import com.futuremod.entity.AlienEntity;
 import com.futuremod.item.SteelArmorItem;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -47,5 +51,24 @@ public class ForgeEvents {
                 && SteelArmorItem.isWearingFullSet(event.getEntity())) {
             event.setCanceled(true);
         }
+    }
+
+    /**
+     * Set completo de acero: el veneno hace la mitad de dano y todo el dano (menos el que atraviesa
+     * todo, como salir del mundo) se reduce un 15%.
+     */
+    @SubscribeEvent
+    public static void onHurt(LivingHurtEvent event) {
+        if (!SteelArmorItem.isWearingFullSet(event.getEntity())) {
+            return;
+        }
+        if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+            return;
+        }
+        float amount = event.getAmount();
+        if (event.getSource().is(DamageTypes.MAGIC) && event.getEntity().hasEffect(MobEffects.POISON)) {
+            amount *= 0.5F;
+        }
+        event.setAmount(amount * 0.85F);
     }
 }

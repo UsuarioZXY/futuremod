@@ -351,6 +351,18 @@ public class RodiaEntity extends Monster {
         return !AlienEntity.isKin(target) && super.canAttack(target);
     }
 
+    /** Cada mordida envenena a la victima (cria: veneno mas corto). */
+    @Override
+    public boolean doHurtTarget(net.minecraft.world.entity.Entity target) {
+        boolean hit = super.doHurtTarget(target);
+        if (hit && target instanceof LivingEntity living && !AlienEntity.isKin(living)) {
+            int ticks = this.isBaby() ? 80 : 140;
+            living.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                    net.minecraft.world.effect.MobEffects.POISON, ticks, 0), this);
+        }
+        return hit;
+    }
+
     /** Altura a la que se sienta el jinete (el Verdiano caballero). */
     @Override
     public double getPassengersRidingOffset() {
