@@ -308,12 +308,12 @@ public class RodiaEntity extends Monster {
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, true) {
             @Override
             public boolean canUse() {
-                return !RodiaEntity.this.isBaby() && super.canUse();
+                return (!RodiaEntity.this.isBaby() || RodiaEntity.this.isTame()) && super.canUse();
             }
 
             @Override
             public boolean canContinueToUse() {
-                return !RodiaEntity.this.isBaby() && super.canContinueToUse();
+                return (!RodiaEntity.this.isBaby() || RodiaEntity.this.isTame()) && super.canContinueToUse();
             }
         });
         this.goalSelector.addGoal(3, new FollowOwnerGoal());
@@ -324,7 +324,7 @@ public class RodiaEntity extends Monster {
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this) {
             @Override
             public boolean canUse() {
-                return !RodiaEntity.this.isBaby() && super.canUse();
+                return (!RodiaEntity.this.isBaby() || RodiaEntity.this.isTame()) && super.canUse();
             }
         }.setAlertOthers());
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true) {
@@ -435,17 +435,29 @@ public class RodiaEntity extends Monster {
 
         @Override
         public boolean canUse() {
-            if (!isTame() || isBaby()) return false;
+            if (!isTame() || isSitting()) return false;
             LivingEntity o = getOwner();
-            if (o == null) return false;
+            if (o == null || !o.isAlive()) return false;
+            // primero: quien dane al dueno
             LivingEntity t = o.getLastHurtByMob();
-            if (t == null || o.getLastHurtByMobTimestamp() + 100 < o.tickCount) {
+            if (!valid(t) || o.tickCount - o.getLastHurtByMobTimestamp() > 200) {
+                // luego: lo que el dueno ataque
                 t = o.getLastHurtMob();
-                if (t == null || o.getLastHurtMobTimestamp() + 100 < o.tickCount) return false;
+                if (!valid(t) || o.tickCount - o.getLastHurtMobTimestamp() > 200) return false;
             }
-            if (t == RodiaEntity.this || !RodiaEntity.this.canAttack(t) || t instanceof Player) return false;
             this.victim = t;
             return true;
+        }
+
+        private boolean valid(LivingEntity t) {
+            return t != null && t.isAlive() && t != RodiaEntity.this && !(t instanceof Player)
+                    && !(t instanceof ArmorStand) && RodiaEntity.this.canAttack(t);
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            LivingEntity t = RodiaEntity.this.getTarget();
+            return t != null && t.isAlive() && isTame() && !isSitting();
         }
 
         @Override
