@@ -1,12 +1,26 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
-  "pattern": [ "S S", "MKM", "SCS" ],
+  "pattern": [
+    "S S",
+    "MKM",
+    "SCS"
+  ],
   "key": {
-    "S": { "item": "futuremod:steel_ingot" },
-    "M": { "item": "futuremod:steel_motor" },
-    "K": { "item": "futuremod:steel_core" },
-    "C": { "item": "futuremod:steel_chip" }
+    "S": {
+      "item": "futuremod:steel_plate"
+    },
+    "M": {
+      "item": "futuremod:steel_motor"
+    },
+    "K": {
+      "item": "futuremod:steel_core"
+    },
+    "C": {
+      "item": "futuremod:steel_chip"
+    }
   },
-  "result": { "item": "futuremod:steel_chestplate" }
+  "result": {
+    "item": "futuremod:steel_chestplate"
+  }
 }

@@ -1,11 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
-  "pattern": [ "SCS", "SGS", " S " ],
+  "pattern": [
+    "SCS",
+    "SGS",
+    " S "
+  ],
   "key": {
-    "S": { "item": "futuremod:steel_ingot" },
-    "C": { "item": "futuremod:steel_chip" },
-    "G": { "item": "futuremod:reinforced_glass" }
+    "S": {
+      "item": "futuremod:steel_plate"
+    },
+    "C": {
+      "item": "futuremod:steel_chip"
+    },
+    "G": {
+      "item": "futuremod:reinforced_glass"
+    }
   },
-  "result": { "item": "futuremod:steel_helmet" }
+  "result": {
+    "item": "futuremod:steel_helmet"
+  }
 }

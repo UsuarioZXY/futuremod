@@ -37,6 +37,9 @@ public class ModItems {
     public static final RegistryObject<Item> STEEL_CORE =
             ITEMS.register("steel_core", () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> STEEL_PLATE =
+            ITEMS.register("steel_plate", () -> new Item(new Item.Properties()));
+
     // Armadura: casco, pantalones y botas dan +1 corazon (2 HP); el peto da +2 corazones (4 HP).
     public static final RegistryObject<Item> STEEL_HELMET =
             ITEMS.register("steel_helmet",

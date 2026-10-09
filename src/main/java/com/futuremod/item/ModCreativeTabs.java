@@ -28,6 +28,7 @@ public class ModCreativeTabs {
                         output.accept(ModItems.STEEL_CHIP.get());
                         output.accept(ModItems.STEEL_MOTOR.get());
                         output.accept(ModItems.STEEL_CORE.get());
+                        output.accept(ModItems.STEEL_PLATE.get());
                         output.accept(ModBlocks.REINFORCED_GLASS.get());
                         output.accept(ModItems.STEEL_HELMET.get());
                         output.accept(ModItems.STEEL_CHESTPLATE.get());

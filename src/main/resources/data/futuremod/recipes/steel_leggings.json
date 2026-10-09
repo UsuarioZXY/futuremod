@@ -1,11 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
-  "pattern": [ "MCM", "S S", "S S" ],
+  "pattern": [
+    "MCM",
+    "S S",
+    "S S"
+  ],
   "key": {
-    "M": { "item": "futuremod:steel_motor" },
-    "C": { "item": "futuremod:steel_chip" },
-    "S": { "item": "futuremod:steel_ingot" }
+    "M": {
+      "item": "futuremod:steel_motor"
+    },
+    "C": {
+      "item": "futuremod:steel_chip"
+    },
+    "S": {
+      "item": "futuremod:steel_plate"
+    }
   },
-  "result": { "item": "futuremod:steel_leggings" }
+  "result": {
+    "item": "futuremod:steel_leggings"
+  }
 }
