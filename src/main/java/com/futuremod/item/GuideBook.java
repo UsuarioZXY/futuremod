@@ -43,7 +43,7 @@ public class GuideBook {
             "\u00a7lVerdiano arquero\u00a7r\n\nDispara flechas primitivas con su arco. Sale en grupos de 1 a 3.\n\nLos Verdianos nunca se atacan entre s\u00ed.",
             "\u00a7lVerdiano escudero\u00a7r\n\nLleva lanza y escudo primitivo. Ataca desde m\u00e1s lejos (2 corazones de da\u00f1o) y a veces bloquea tus golpes.\n\nSale en grupos de 1 a 3.",
             "\u00a7lVerdiano caballero\u00a7r\n\nLleva armadura y espada primitivas y escudo (a veces bloquea tus golpes). Cabalga sobre un Rodia.\n\nSale de d\u00eda y de noche.",
-            "\u00a7lRodia\u00a7r\n\nBestia alien\u00edgena parecida a un dinosaurio. Es r\u00e1pida y fuerte (15 corazones).\n\nSale sola o con un Verdiano caballero encima. Hay cr\u00edas inofensivas.",
+            "\u00a7lRodia\u00a7r\n\nBestia alien\u00edgena parecida a un dinosaurio. Es r\u00e1pida y fuerte (15 corazones).\n\nSale sola o con un Verdiano caballero encima. Hay cr\u00edas inofensivas: dales cualquier carne para domesticarlas (a veces hace falta insistir). Un Rodia amigo es m\u00e1s lento, te sigue y te defiende.",
             "\u00a7lVerdiano curandero\u00a7r\n\nLleva un cetro y cura a los Verdianos y Rodias en 20 bloques. Huye de ti y no ataca.\n\nSale en grupos de 1 a 2."
     };
 
