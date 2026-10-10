@@ -1,0 +1,87 @@
+{
+  "temperature": 1.6,
+  "downfall": 0.0,
+  "has_precipitation": false,
+  "effects": {
+    "fog_color": 7027242,
+    "sky_color": 10115652,
+    "water_color": 7227962,
+    "water_fog_color": 3810328,
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    },
+    "foliage_color": 6969898,
+    "grass_color": 8022586
+  },
+  "spawners": {
+    "monster": [
+      {
+        "type": "futuremod:alien",
+        "weight": 8,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "futuremod:alien_archer",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "futuremod:rodia",
+        "weight": 14,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "futuremod:alien_shieldbearer",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 2
+      }
+    ],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "features": [
+    [],
+    [
+      "minecraft:lake_lava_surface"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_iron_upper",
+      "minecraft:ore_gold",
+      "minecraft:ore_diamond",
+      "futuremod:steel_ore"
+    ],
+    [],
+    [
+      "minecraft:spring_lava"
+    ],
+    [
+      "minecraft:patch_dead_bush"
+    ],
+    []
+  ]
+}

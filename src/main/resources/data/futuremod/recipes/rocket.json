@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " P ",
+    "PKP",
+    "MCM"
+  ],
+  "key": {
+    "P": {
+      "item": "futuremod:steel_plate"
+    },
+    "K": {
+      "item": "futuremod:steel_core"
+    },
+    "M": {
+      "item": "futuremod:steel_motor"
+    },
+    "C": {
+      "item": "futuremod:steel_chip"
+    }
+  },
+  "result": {
+    "item": "futuremod:rocket"
+  }
+}

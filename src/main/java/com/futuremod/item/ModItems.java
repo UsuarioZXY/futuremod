@@ -74,6 +74,10 @@ public class ModItems {
             ITEMS.register("verdian_boots",
                     () -> new VerdianArmorItem(ModArmorMaterials.VERDIAN, ArmorItem.Type.BOOTS, new Item.Properties(), 0.15D));
 
+    // Cohete: viaje al planeta Verdia y de vuelta
+    public static final RegistryObject<Item> ROCKET =
+            ITEMS.register("rocket", () -> new RocketItem(new Item.Properties().stacksTo(1).durability(16)));
+
     // Botin del alienigena
     public static final RegistryObject<Item> ALIEN_BONE =
             ITEMS.register("alien_bone", () -> new Item(new Item.Properties()));
